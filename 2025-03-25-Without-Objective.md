@@ -51,3 +51,7 @@ Bluesky and other public - facing social media platforms are honestly great plac
 The task of formatting still sucks. Markdown isn't semantic, semantics in NLP is hard, XML hurts my eyes, and I don't want to care about it any longer. 
 
 Large Language Models are here to stay. Everyone has their opinions and ethics and morals are still being built in regards to how these things should be treated/used. Regardless of the result - they are fun to play with and so will likely be here forever. They aren't great for everything - they hallucinate, lie, are shitty writers, plagiarize and more - but sometimes these are strengths. Ask an AI for writing advice - not because it's good, because the recoil you feel in your gut will send you on the path you most agree with anyway. (Like Cunningham's Law - but always put yourself in the position of the adjudicator)
+
+---
+
+Reply @ https://bsky.app/profile/conradmearns.bsky.social/post/3llasugp2sk26
