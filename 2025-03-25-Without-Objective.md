@@ -22,7 +22,7 @@ True gardening doesn't take as much energy and dedication as a collection of not
 
 Most gardens are grown to flower, or to produce fruit. Most trees which are grown, are grown to harvest.
 
-The biggest distinction is that as my collections of plants grows - from a table of saplings to acres of farmland, the amount of work I must commit to grows extremely slowly. Before modern equipment, it was said that a single person could tend a hecatre of farmland per year. Now - a single farmhand with the help of combines, tractors, pesticides, and even weed-eating robots can tend to huge farms. 
+The biggest distinction is that as my collections of plants grows - from a table of saplings to acres of farmland, the amount of work I must commit to grows extremely slowly. Before modern equipment, it was said that a single person could tend a hectare of farmland per year. Now - a single farmhand with the help of combines, tractors, pesticides, and even weed-eating robots can tend to huge farms. 
 
 Each note however - requires certain dedicated amounts of energy for it to progress to each new stage of it's useful life.
 
