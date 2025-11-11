@@ -25,6 +25,7 @@ i draw a box to each to signify if i've started or not, finished, or moved to an
 I divide my journal into 4 sections by foldding and scoring with a pen and write my tasks on the last section
 this way, if i run out of room i can continue on the next page and use the fold to see what was on old pages for transcription
 
+
 the preceding column is for needs
 typically this is a place for short meeting notes,
 so i can take note of something someone else or myself wants that we dont have a solution of task ready for
