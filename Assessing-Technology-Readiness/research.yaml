@@ -1,0 +1,322 @@
+---
+# Technology Readiness Level (TRL) Research Database
+
+sources:
+  wikipedia_trl:
+    title: >-
+      Technology readiness level
+    link: >-
+      https://en.wikipedia.org/wiki/Technology_readiness_level
+    authors:
+      - Wikipedia Contributors
+    date_accessed: 2025-11-10
+    source_type: encyclopedia
+    insights:
+      - >-
+        TRL developed by NASA in the 1970s
+      - >-
+        Now used by US Department of Defense and European Space Agency
+      - >-
+        Standardized by ISO in 2013
+      - >-
+        European Union mandated its use in Horizon 2020 funding programs
+      - >-
+        Extensive criticism published in The Innovation Journal stated that 'the concreteness and sophistication of the TRL scale gradually diminished as its usage spread outside its original context'
+      - >-
+        Commercial Readiness Level (CRL) developed as a nine-point scale to be synchronized with TRL to assess market readiness and commercialization viability
+      - >-
+        Software release cycles include pre-alpha, alpha, beta, release candidate, general availability
+
+  daffodils_trl:
+    title: >-
+      All About Technology Readiness Levels
+    link: >-
+      https://insights.daffodilsw.com/blog/all-about-technology-readiness-levels
+    authors:
+      - Daffodil Software
+    date_accessed: 2025-11-10
+    source_type: blog
+    insights:
+      - >-
+        Companies like BP, John Deere, and GoogleX use TRL alongside international government organizations
+
+  workingmouse_srl:
+    title: >-
+      Software Readiness Level
+    link: >-
+      https://workingmouse.com.au/innovation/software-readiness-level/
+    authors:
+      - WorkingMouse
+    date_accessed: 2025-11-10
+    source_type: blog
+    insights:
+      - >-
+        TRL is unapologetically hardware-focused and inappropriate for software-based products and services
+
+  researchgate_trl_software:
+    title: >-
+      Applying Technical Readiness Levels to Software: New Thoughts and Examples
+    link: >-
+      https://www.researchgate.net/publication/285403347_642_Applying_Technical_Readiness_Levels_to_Software_New_Thoughts_and_Examples
+    authors:
+      - ResearchGate
+    date_accessed: 2025-11-10
+    source_type: research_paper
+    insights:
+      - >-
+        TRL limitations include blurring together various aspects of software readiness
+      - >-
+        Absence of important readiness attributes
+      - >-
+        Issues with software 'decay'
+      - >-
+        No recognition of the temporal nature of development
+
+  sei_trl_software:
+    title: >-
+      Technology Readiness Levels for Software
+    link: >-
+      https://www.sei.cmu.edu/documents/860/2010_005_001_15305.pdf
+    authors:
+      - Software Engineering Institute
+    date_accessed: 2025-11-10
+    source_type: technical_report
+    insights:
+      - >-
+        TRL limitations include blurring together various aspects of software readiness
+      - >-
+        Absence of important readiness attributes
+      - >-
+        Issues with software 'decay'
+      - >-
+        No recognition of the temporal nature of development
+      - >-
+        The TRL threshold for defining what constitutes software technology readiness is vague enough that consistently applying it to new, reused, and COTS software is subject to interpretation and inconsistency
+
+  itonics_readiness:
+    title: >-
+      14 Readiness Level Frameworks
+    link: >-
+      https://www.itonics-innovation.com/blog/14-readiness-level-frameworks
+    authors:
+      - ITONICS
+    date_accessed: 2025-11-10
+    source_type: blog
+    insights:
+      - >-
+        At least 14 different readiness level frameworks exist including TRL, MRL (Manufacturing), SRL (System), IRL (Integration), CRL (Commercial), DRL (Design), and others
+
+  medium_kth:
+    title: >-
+      KTH Innovation Readiness Level: A Multi-dimensional Framework for Innovation Maturity
+    link: >-
+      https://medium.com/@alexanderdrobyshevski/kth-innovation-readiness-level-a-multi-dimensional-framework-for-innovation-maturity-ac8bd72bcaa6
+    authors:
+      - Alexander Drobyshevski
+    date_accessed: 2025-11-10
+    source_type: blog
+    insights:
+      - >-
+        KTH Innovation developed a multidimensional Innovation Readiness Level framework that assesses multiple dimensions simultaneously rather than a single linear scale
+
+  tamegon_crl:
+    title: >-
+      TRL CRL Levels
+    link: >-
+      https://www.tamegon.com/trl-crl-levels
+    authors:
+      - Tamegon
+    date_accessed: 2025-11-10
+    source_type: blog
+    insights:
+      - >-
+        CRL developed as a nine-point scale to be synchronized with TRL to assess market readiness and commercialization viability
+
+  scimita_crl:
+    title: >-
+      Mastering CRL vs TRL: Choosing the Right Development Stage for Your Project's Success
+    link: >-
+      https://scimitaventures.com/insights/mastering-crl-vs-trl-choosing-the-right-development-stage-for-your-projects-successnbsp
+    authors:
+      - Scimita Ventures
+    date_accessed: 2025-11-10
+    source_type: blog
+    insights:
+      - >-
+        CRL should always equal or exceed TRL, with both technical and commercial risks substantially reduced around level 5
+
+  appinventiv_devops:
+    title: >-
+      DevOps Maturity Model
+    link: >-
+      https://appinventiv.com/blog/devops-maturity-model/
+    authors:
+      - Appinventiv
+    date_accessed: 2025-11-10
+    source_type: blog
+    insights:
+      - >-
+        DevOps maturity models progress through stages emphasizing automation, observability, sustainability, and maintainability
+
+  planview_devops:
+    title: >-
+      The DevOps Maturity Model: A Roadmap to Continuous Improvement
+    link: >-
+      https://www.planview.com/resources/articles/the-devops-maturity-model-a-roadmap-to-continuous-improvement/
+    authors:
+      - Planview
+    date_accessed: 2025-11-10
+    source_type: article
+    insights:
+      - >-
+        DevOps maturity models progress through stages emphasizing automation, observability, sustainability, and maintainability
+
+  icf_devops:
+    title: >-
+      The 5 Phases of DevOps Maturity
+    link: >-
+      https://www.icf.com/insights/technology/the-5-phases-of-devops-maturity
+    authors:
+      - ICF
+    date_accessed: 2025-11-10
+    source_type: article
+    insights:
+      - >-
+        ICF's 5-phase DevOps maturity model explicitly tracks: organization, delivery, automation, testing, security, monitoring, and operations
+
+  spacelift_devops:
+    title: >-
+      DevOps Maturity Model
+    link: >-
+      https://spacelift.io/blog/devops-maturity-model
+    authors:
+      - Spacelift
+    date_accessed: 2025-11-10
+    source_type: blog
+    insights:
+      - >-
+        DevOps maturity levels typically range from initial/ad-hoc practices to optimized stages with extensive automation, continuous monitoring, and constant improvement culture
+
+  capitalone_chaos:
+    title: >-
+      Continuous Chaos: Introducing Chaos Engineering into DevOps Practices
+    link: >-
+      https://www.capitalone.com/tech/software-engineering/continuous-chaos-introducing-chaos-engineering-into-devops-practices/
+    authors:
+      - Capital One
+    date_accessed: 2025-11-10
+    source_type: blog
+    insights:
+      - >-
+        The Chaos Maturity Model (CMM) uses two metrics: sophistication and adoption, measuring how organizations progress from no chaos testing to self-healing systems
+
+  oreilly_chaos:
+    title: >-
+      Chaos Engineering
+    link: >-
+      https://www.oreilly.com/library/view/chaos-engineering/9781491988459/ch09.html
+    authors:
+      - O'Reilly Media
+    date_accessed: 2025-11-10
+    source_type: book_chapter
+    insights:
+      - >-
+        The Chaos Maturity Model (CMM) uses two metrics: sophistication and adoption, measuring how organizations progress from no chaos testing to self-healing systems
+
+  stagegate_overview:
+    title: >-
+      The Stage-Gate Model: An Overview
+    link: >-
+      https://www.stage-gate.com/blog/the-stage-gate-model-an-overview/
+    authors:
+      - Stage-gate
+    date_accessed: 2025-11-10
+    source_type: blog
+    insights:
+      - >-
+        The Stage-Gate model divides innovation from idea to launch into distinct stages separated by decision gates
+      - >-
+        Used by over 80% of companies in North America
+
+  tcgen_stagegate:
+    title: >-
+      Stage-Gate Process
+    link: >-
+      https://www.tcgen.com/product-development/stage-gate-process/
+    authors:
+      - Tcgen
+    date_accessed: 2025-11-10
+    source_type: blog
+    insights:
+      - >-
+        Stage-Gate has been criticized as not agile enough for software, leading to hybrid approaches combining Stage-Gate with Agile methodologies
+
+  gocious_stagegate:
+    title: >-
+      What is Stage-Gate Methodology and Should You Still Use It?
+    link: >-
+      https://gocious.com/blog/what-is-stage-gate-methodology-and-should-you-still-use-it
+    authors:
+      - Gocious
+    date_accessed: 2025-11-10
+    source_type: blog
+    insights:
+      - >-
+        Stage-Gate has been criticized as not agile enough for software, leading to hybrid approaches combining Stage-Gate with Agile methodologies
+
+  starttech_mvp:
+    title: >-
+      Why Your MVP is Not a Beta Version of Your Product
+    link: >-
+      https://www.starttech.vc/blog/2020/why-your-mvp-is-not-a-beta-version-of-your-product/
+    authors:
+      - Starttech Ventures
+    date_accessed: 2025-11-10
+    source_type: blog
+    insights:
+      - >-
+        Software release cycles focus on testing/deployment stages: MVP, Beta, GA
+      - >-
+        These stages are distinct from maturity dimensions
+
+# Key findings and gaps
+synthesis:
+  trl_adoption:
+    - >-
+      TRL is extremely widely adopted across government and industry
+    - >-
+      Standardized by ISO in 2013
+    - >-
+      Mandated by EU in Horizon 2020
+
+  trl_limitations:
+    - >-
+      Hardware-centric design inappropriate for software
+    - >-
+      Blurs different aspects of software readiness
+    - >-
+      Vague definitions leading to inconsistency
+    - >-
+      Loss of sophistication as usage spread
+
+  existing_alternatives:
+    - >-
+      14+ different readiness level frameworks exist (MRL, SRL, IRL, CRL, DRL, etc.)
+    - >-
+      KTH Innovation uses multidimensional approach
+    - >-
+      CRL addresses commercial readiness synchronized with TRL
+    - >-
+      DevOps maturity models cover automation, observability, sustainability, maintainability
+    - >-
+      Chaos Maturity Model addresses robustness
+    - >-
+      Stage-Gate model for innovation stages
+
+  gap_identified:
+    - >-
+      NO framework explicitly uses: Novelty → Viability → Practicality → Sustainability → Maintainability
+    - >-
+      Closest parallels are MVP/Beta/GA cycles, DevOps maturity, and CRL+TRL combined
+    - >-
+      These touch on elements but don't provide cohesive progression model for software
