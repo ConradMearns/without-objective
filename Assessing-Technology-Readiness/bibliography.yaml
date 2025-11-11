@@ -1,0 +1,444 @@
+---
+# Software Readiness Levels - Research Bibliography
+# Generated: 2025-11-10
+
+categories:
+
+  foundational_frameworks:
+    description: "Core readiness level frameworks and their origins"
+    sources:
+      - id: nasa_trl_overview
+        title: "Technology Readiness Levels"
+        author: "NASA Space Communications and Navigation Program"
+        type: "website"
+        url: "https://www.nasa.gov/directorates/somd/space-communications-navigation-program/technology-readiness-levels/"
+        year: 2024
+
+      - id: nasa_trl_definitions
+        title: "Technology Readiness Level Definitions"
+        author: "NASA"
+        type: "pdf"
+        url: "https://www.nasa.gov/wp-content/uploads/2017/12/458490main_trl_definitions.pdf"
+        notes: "Hardware and software TRL definitions"
+
+      - id: dod_tra_guidebook
+        title: "Technology Readiness Assessment Guidebook"
+        author: "US Department of Defense Chief Technology Officer"
+        type: "pdf"
+        url: "https://www.cto.mil/wp-content/uploads/2025/03/TRA-Guide-Feb2025-Cleared.pdf"
+        year: 2025
+        month: "February"
+        notes: "Contains TRL definitions for hardware and software (Tables 2-1 and 2-2)"
+
+      - id: trl_wikipedia
+        title: "Technology readiness level"
+        author: "Wikipedia"
+        type: "wiki"
+        url: "https://en.wikipedia.org/wiki/Technology_readiness_level"
+        accessed: "2025-11-10"
+        notes: "Comprehensive overview including CRL, ISO standardization, and criticisms"
+
+  software_specific_frameworks:
+    description: "Frameworks specifically designed for software readiness"
+    sources:
+      - id: maana_service_rl
+        title: "Service Readiness Levels (SRL)"
+        author: "Maana.io"
+        type: "github"
+        url: "https://github.com/maana-io/ServiceReadinessLevels"
+        notes: "6-level framework for software services, adapted from NASA TRL with 8 assessment dimensions"
+
+      - id: workingmouse_srl
+        title: "Reworking TRL & IRL: Software Readiness Levels in App Dev"
+        author: "WorkingMouse"
+        type: "blog"
+        url: "https://www.workingmouse.com.au/insights/blogs/reworking-trl-and-irl-for-app-development-software-readiness-level/"
+        notes: "12-stage framework emphasizing business validation and market readiness"
+
+      - id: workingmouse_trl_critique
+        title: "Software Readiness Level"
+        author: "WorkingMouse"
+        type: "blog"
+        url: "https://workingmouse.com.au/innovation/software-readiness-level/"
+        notes: "Critique of TRL as hardware-focused and inappropriate for software"
+
+      - id: nasa_arl
+        title: "The Application Readiness Level Metric"
+        author: "NASA Applied Sciences Program"
+        type: "website"
+        url: "https://appliedsciences.nasa.gov/join-mission/publications-resources/application-readiness-level-metric"
+        notes: "9-level scale for applications, organized into 3 phases"
+
+      - id: nasa_arl_pdf
+        title: "The Application Readiness Level Metric"
+        author: "NASA"
+        type: "pdf"
+        url: "https://carbon.nasa.gov/docs/The%20ARL%20Metric.pdf"
+        notes: "Detailed ARL documentation for Carbon Monitoring System"
+
+  system_integration_frameworks:
+    description: "Frameworks addressing system and integration readiness"
+    sources:
+      - id: sauser_srl
+        title: "From TRL to SRL: The Concept of Systems Readiness Levels"
+        author: "Sauser, B., Verma, D., Ramirez-Marquez, J., and Gove, R."
+        type: "paper"
+        url: "https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=b501c19469fa5d11ada2858f310451b81b3dc61a"
+        year: 2006
+        notes: "Original SRL proposal using TRL × IRL matrix multiplication"
+
+      - id: srl_quantitative_analysis
+        title: "A Quantitative Analysis of System Readiness Level Plus"
+        author: "Various"
+        type: "conference"
+        url: "https://www.matec-conferences.org/articles/matecconf/pdf/2018/18/matecconf_ijcaet-isampe2018_02067.pdf"
+        year: 2018
+        publisher: "MATEC Web of Conferences"
+        notes: "Analysis of SRL calculation methods and limitations"
+
+      - id: dod_irl
+        title: "Defining an Integration Readiness Level for Defense Acquisition"
+        author: "Various"
+        type: "paper"
+        url: "https://web.mst.edu/lib-circ/files/special%20collections/INCOSE/Defining%20an%20Integration%20Readiness%20Level%20for%20Defense%20Aquisition.pdf"
+        notes: "IRL framework for DoD acquisition programs"
+
+  trl_criticisms:
+    description: "Academic and industry critiques of TRL for software"
+    sources:
+      - id: sei_beyond_trl
+        title: "Beyond Technology Readiness Levels for Software: U.S. Army Workshop Report"
+        author: "Software Engineering Institute, Carnegie Mellon University"
+        type: "technical_report"
+        url: "https://www.sei.cmu.edu/documents/860/2010_005_001_15305.pdf"
+        year: 2010
+        report_number: "2010_005_001_15305"
+        notes: "Key criticisms: TRL blurs aspects of readiness, vague definitions, no recognition of temporal nature"
+
+      - id: trl_software_application
+        title: "Applying Technical Readiness Levels to Software: New Thoughts and Examples"
+        author: "Various"
+        type: "paper"
+        url: "https://www.researchgate.net/publication/285403347_642_Applying_Technical_Readiness_Levels_to_Software_New_Thoughts_and_Examples"
+        publisher: "ResearchGate"
+        notes: "Issues with software decay and temporal nature of development"
+
+  maturity_models:
+    description: "Software and organizational maturity frameworks"
+    sources:
+      - id: cmmi_wikipedia
+        title: "Capability Maturity Model Integration"
+        author: "Wikipedia"
+        type: "wiki"
+        url: "https://en.wikipedia.org/wiki/Capability_Maturity_Model_Integration"
+        accessed: "2025-11-10"
+
+      - id: cmmi_overview_cio
+        title: "What is CMMI? A model for optimizing development processes"
+        author: "CIO"
+        type: "article"
+        url: "https://www.cio.com/article/274530/cmmi-explained.html"
+        notes: "5-level maturity model with quantitative management at levels 4-5"
+
+      - id: cmmi_bmc
+        title: "Capability Maturity Model Integration (CMMI): An Introduction"
+        author: "BMC Software"
+        type: "blog"
+        url: "https://www.bmc.com/blogs/cmmi-capability-maturity-model-integration/"
+
+      - id: devops_maturity_appinventiv
+        title: "DevOps Maturity Model"
+        author: "Appinventiv"
+        type: "blog"
+        url: "https://appinventiv.com/blog/devops-maturity-model/"
+        notes: "Progression through automation, observability, sustainability, maintainability"
+
+      - id: devops_maturity_planview
+        title: "The DevOps Maturity Model: A Roadmap to Continuous Improvement"
+        author: "Planview"
+        type: "blog"
+        url: "https://www.planview.com/resources/articles/the-devops-maturity-model-a-roadmap-to-continuous-improvement/"
+
+      - id: icf_devops_maturity
+        title: "The 5 Phases of DevOps Maturity"
+        author: "ICF"
+        type: "article"
+        url: "https://www.icf.com/insights/technology/the-5-phases-of-devops-maturity"
+        notes: "Tracks organization, delivery, automation, testing, security, monitoring, operations"
+
+  quality_models:
+    description: "Software quality measurement frameworks"
+    sources:
+      - id: iso25010_overview
+        title: "The ISO 25010 software quality standard from a product standpoint"
+        author: "ResearchGate"
+        type: "figure"
+        url: "https://www.researchgate.net/figure/The-ISO-25010-software-quality-standard-from-a-product-standpoint_fig1_317195033"
+        notes: "8 quality characteristics, 31 sub-characteristics, but no measurement definitions"
+
+      - id: iso25010_evaluation
+        title: "Evaluating Open Source Software Quality Models Against ISO 25010"
+        author: "Various"
+        type: "paper"
+        url: "https://www.researchgate.net/publication/308848262_Evaluating_Open_Source_Software_Quality_Models_Against_ISO_25010"
+        year: 2016
+
+      - id: software_quality_metrics_iieta
+        title: "Evaluating Software Quality Metrics for Enhanced Software Management and Engineering"
+        author: "IIETA"
+        type: "journal"
+        url: "https://www.iieta.org/journals/isi/paper/10.18280/isi.290416"
+        doi: "10.18280/isi.290416"
+
+      - id: gqm_paradigm
+        title: "The Goal/Question/Metric (GQM) Paradigm"
+        author: "Basili et al."
+        type: "blog"
+        url: "https://bminard.github.io/2020/03/goal-question-metric"
+        year: 1994
+        notes: "Framework for deriving quality metrics from goals and questions"
+
+  devops_metrics:
+    description: "DevOps and deployment performance metrics"
+    sources:
+      - id: dora_metrics_typo
+        title: "Implementing DORA DevOps Metrics in Large Organizations"
+        author: "Typo"
+        type: "blog"
+        url: "https://typoapp.io/blog/dora-devops-metrics"
+        notes: "4 core metrics: Deployment Frequency, Lead Time, MTTR, Change Failure Rate"
+
+      - id: software_quality_metrics_multitudes
+        title: "Software quality metrics every development team should track"
+        author: "Multitudes"
+        type: "blog"
+        url: "https://www.multitudes.com/blog/software-quality-metrics-every-development-team-should-track"
+
+  production_readiness:
+    description: "Production readiness frameworks and practices"
+    sources:
+      - id: production_readiness_techtarget
+        title: "A production readiness checklist for software development"
+        author: "TechTarget"
+        type: "article"
+        url: "https://www.techtarget.com/searchsoftwarequality/tip/A-production-readiness-checklist-for-software-development"
+
+      - id: production_readiness_port
+        title: "Production readiness checklist: ensuring smooth deployments"
+        author: "Port"
+        type: "blog"
+        url: "https://www.port.io/blog/production-readiness-checklist-ensuring-smooth-deployments"
+
+      - id: production_readiness_opslevel
+        title: "Production readiness checklist: An in-depth guide"
+        author: "OpsLevel"
+        type: "blog"
+        url: "https://www.opslevel.com/resources/production-readiness-in-depth"
+
+      - id: production_readiness_cortex
+        title: "Ship with confidence: Production readiness checklists that prevent incidents"
+        author: "Cortex"
+        type: "blog"
+        url: "https://www.cortex.io/post/how-to-create-a-great-production-readiness-checklist"
+
+      - id: google_sre_book
+        title: "Google SRE - Production Readiness Review: Engagement Insight"
+        author: "Google"
+        type: "book_chapter"
+        url: "https://sre.google/sre-book/evolving-sre-engagement-model/"
+        notes: "PRR criteria including paging rate (Treynor Maximum), capacity planning, SLA performance"
+
+      - id: google_sre_landmines
+        title: "How SREs at Google find the landmines in a service"
+        author: "Google Cloud"
+        type: "blog"
+        url: "https://cloud.google.com/blog/products/gcp/how-sres-find-the-landmines-in-a-service-cre-life-lessons"
+
+      - id: production_readiness_signoz
+        title: "Essential Production Readiness Checklist for Developers"
+        author: "SigNoz"
+        type: "guide"
+        url: "https://signoz.io/guides/production-readiness-checklist/"
+
+  quantitative_approaches:
+    description: "Research on quantifying software readiness"
+    sources:
+      - id: quantifying_software_ieee
+        title: "Quantifying software reliability and readiness"
+        author: "Various"
+        type: "conference"
+        url: "https://ieeexplore.ieee.org/document/5137352"
+        year: 2009
+        publisher: "IEEE"
+        doi: "10.1109/RAMS.2009.4914674"
+        notes: "Proposes readiness index amalgamating requirements, project management, testing, stability data"
+
+      - id: software_metrics_process_maturity
+        title: "Software metrics in the process maturity framework"
+        author: "Various"
+        type: "journal"
+        url: "https://www.sciencedirect.com/science/article/abs/pii/016412129090047P"
+        publisher: "ScienceDirect"
+        year: 1990
+
+  industry_reports:
+    description: "Recent industry surveys and state-of-the-industry reports"
+    sources:
+      - id: cortex_2024_report
+        title: "The 2024 State of Software Production Readiness"
+        author: "Cortex"
+        type: "report"
+        url: "https://www.cortex.io/report/the-2024-state-of-software-production-readiness"
+        year: 2024
+        notes: "Survey of 50 engineering leaders, 56% cite manual follow-up as blocker"
+
+      - id: jetbrains_quality_2024
+        title: "State of Software Quality Report 2024"
+        author: "JetBrains Qodana"
+        type: "report"
+        url: "https://lp.jetbrains.com/software-quality-report-2024-by-qodana/"
+        year: 2024
+        notes: "Survey of 808 developers, automated quality gates increased from 27% to 40%"
+
+      - id: katalon_quality_2024
+        title: "State of Software Quality Report 2024"
+        author: "Katalon"
+        type: "report"
+        url: "https://katalon.com/reports/state-quality-2024"
+        year: 2024
+        notes: "4000+ insights on QE trends, testing techniques, AI adoption"
+
+      - id: practitest_stot_2024
+        title: "State of Testing Report 2024"
+        author: "PractiTest & Tea-time with Testers"
+        type: "report"
+        url: "https://www.practitest.com/assets/pdf/stot-2024.pdf"
+        year: 2024
+
+  multidimensional_frameworks:
+    description: "Alternative readiness frameworks with multiple dimensions"
+    sources:
+      - id: readiness_frameworks_itonics
+        title: "14 Readiness Level Frameworks"
+        author: "ITONICS"
+        type: "blog"
+        url: "https://www.itonics-innovation.com/blog/14-readiness-level-frameworks"
+        notes: "Overview of TRL, MRL, SRL, IRL, CRL, DRL and others"
+
+      - id: kth_innovation_rl
+        title: "KTH Innovation Readiness Level: A Multi-Dimensional Framework for Innovation Maturity"
+        author: "Alexander Drobyshevski"
+        type: "blog"
+        url: "https://medium.com/@alexanderdrobyshevski/kth-innovation-readiness-level-a-multi-dimensional-framework-for-innovation-maturity-ac8bd72bcaa6"
+        notes: "Multidimensional framework assessing multiple dimensions simultaneously"
+
+      - id: crl_overview
+        title: "Commercial Readiness Level (CRL)"
+        author: "Tamegon"
+        type: "blog"
+        url: "https://www.tamegon.com/trl-crl-levels"
+        notes: "9-point scale synchronized with TRL for market readiness"
+
+      - id: crl_vs_trl
+        title: "Mastering CRL vs TRL: Choosing the Right Development Stage"
+        author: "Scimita Ventures"
+        type: "blog"
+        url: "https://scimitaventures.com/insights/mastering-crl-vs-trl-choosing-the-right-development-stage-for-your-projects-successnbsp"
+        notes: "CRL should equal or exceed TRL, both risks reduced around level 5"
+
+  chaos_engineering:
+    description: "Chaos engineering and resilience maturity"
+    sources:
+      - id: chaos_maturity_capitalone
+        title: "Continuous Chaos: Introducing Chaos Engineering into DevOps Practices"
+        author: "Capital One"
+        type: "blog"
+        url: "https://www.capitalone.com/tech/software-engineering/continuous-chaos-introducing-chaos-engineering-into-devops-practices/"
+        notes: "Chaos Maturity Model (CMM) with sophistication and adoption metrics"
+
+      - id: chaos_engineering_oreilly
+        title: "Chaos Engineering: Building Confidence in System Behavior"
+        author: "O'Reilly Media"
+        type: "book"
+        url: "https://www.oreilly.com/library/view/chaos-engineering/9781491988459/ch09.html"
+        chapter: 9
+        notes: "Progression from no chaos testing to self-healing systems"
+
+  stage_gate:
+    description: "Stage-gate and innovation management frameworks"
+    sources:
+      - id: stage_gate_overview
+        title: "The Stage-Gate Model: An Overview"
+        author: "Stage-Gate International"
+        type: "blog"
+        url: "https://www.stage-gate.com/blog/the-stage-gate-model-an-overview/"
+        notes: "Used by 80%+ of North American companies, divides innovation into stages with gates"
+
+      - id: stage_gate_tcgen
+        title: "Stage-Gate Process"
+        author: "TCGen"
+        type: "blog"
+        url: "https://www.tcgen.com/product-development/stage-gate-process/"
+        notes: "Criticisms of not being agile enough for software"
+
+      - id: stage_gate_gocious
+        title: "What is Stage-Gate Methodology and Should You Still Use It?"
+        author: "Gocious"
+        type: "blog"
+        url: "https://gocious.com/blog/what-is-stage-gate-methodology-and-should-you-still-use-it"
+        notes: "Hybrid approaches combining Stage-Gate with Agile"
+
+  software_lifecycle:
+    description: "Software release lifecycle and versioning"
+    sources:
+      - id: software_release_lifecycle
+        title: "Software release life cycle"
+        author: "Wikipedia"
+        type: "wiki"
+        url: "https://en.wikipedia.org/wiki/Software_release_life_cycle"
+        notes: "Pre-alpha, alpha, beta, release candidate, general availability stages"
+
+      - id: mvp_vs_beta
+        title: "Why your MVP is not a Beta version of your product"
+        author: "Starttech Ventures"
+        type: "blog"
+        url: "https://www.starttech.vc/blog/2020/why-your-mvp-is-not-a-beta-version-of-your-product/"
+
+  maturity_model_resources:
+    description: "General maturity model concepts and applications"
+    sources:
+      - id: maturity_models_splunk
+        title: "Maturity Models for IT & Technology"
+        author: "Splunk"
+        type: "blog"
+        url: "https://www.splunk.com/en_us/blog/learn/maturity-models.html"
+
+      - id: digital_maturity_2024
+        title: "A Complete Guide to Digital Maturity Models in 2024"
+        author: "Upcore Technologies"
+        type: "blog"
+        url: "https://www.upcoretech.com/insights/digital-maturity-models/"
+        notes: "MIT CISR model with 4 dimensions: strategy, organization, processes, technology"
+
+      - id: maturity_model_definition
+        title: "Maturity Model Meaning & Definition"
+        author: "BrightWork"
+        type: "glossary"
+        url: "https://www.brightwork.com/glossary/maturity-model"
+
+notes:
+  search_date: "2025-11-10"
+  search_scope: "Comprehensive research on software readiness levels, quantification methods, and maturity frameworks"
+  key_findings:
+    - "Multiple 'SRL' acronyms exist: System Readiness Level (mathematical), Service Readiness Level (software services)"
+    - "TRL widely criticized as hardware-centric and inappropriate for software"
+    - "No standardized software-native readiness framework exists"
+    - "Quantification approaches range from mathematical (SRL=TRL×IRL) to qualitative milestones"
+    - "Modern approaches emphasize continuous assessment over one-time gates"
+    - "Production readiness frameworks most mature for operational software"
+  gaps_identified:
+    - "No framework explicitly addresses: Novelty → Viability → Practicality → Sustainability → Maintainability"
+    - "Lack of lifecycle-spanning quantitative models"
+    - "Insufficient attention to software decay and temporal aspects"
+    - "Limited AI/ML-specific readiness frameworks"
+    - "Few frameworks integrate business, technical, and operational dimensions"
