@@ -1,0 +1,30 @@
+step: 3
+description: Relative importance scores for step 3
+problems:
+  morning-rush-chaos: 21.37942939642018
+  remote-worker-homeless: 18.481324420626432
+  inconsistent-experience: 22.920032011084785
+  neighborhood-disconnect: 24.462993617117014
+  food-disappoints: 12.756220554751597
+needs:
+  reduce-wait-times: 9.683162203894117
+  predictable-seating: 7.19009988043086
+  consistent-training: 12.675315270001306
+  local-identity: 11.98309059274024
+  expanded-food-program: 7.197337180394252
+  workspace-amenities: 6.3829429872387085
+  community-gathering-space: 11.265200059717086
+  mobile-convenience: 8.307150296211685
+  operational-efficiency: 10.476106907924558
+  brand-differentiation: 14.839594621447185
+features:
+  mobile-order-ahead: 10.550164851010189
+  seating-availability-api: 8.107890836869721
+  barista-certification: 12.864576479181396
+  local-artist-program: 12.338802402046008
+  neighborhood-manager-role: 13.095195132663342
+  commercial-espresso-upgrade: 5.761730357386536
+  kitchen-retrofit: 6.170598319615709
+  coworking-membership: 7.782965734439422
+  community-event-hosting: 9.83340120349672
+  supply-chain-standardization: 13.494674683290944

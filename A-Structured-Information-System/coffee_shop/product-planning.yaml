@@ -1,0 +1,93 @@
+meta:
+  description: |
+    Strategic planning for urban coffee shop chain expansion.
+    Maps customer problems to business needs to specific features/investments.
+
+    This example demonstrates QFD-inspired planning for a coffee shop chain
+    deciding how to prioritize expansion investments.
+
+problems:
+  morning-rush-chaos:
+    title: Morning Rush Chaos
+    description: Long lines during peak hours drive customers to competitors
+
+  remote-worker-homeless:
+    title: Remote Workers Have Nowhere to Go
+    description: Remote workers need reliable workspace but can't predict availability
+
+  inconsistent-experience:
+    title: Inconsistent Experience Across Locations
+    description: Quality and atmosphere vary wildly between locations
+
+  neighborhood-disconnect:
+    title: Neighborhood Disconnect
+    description: Shops feel like generic chains, not community spaces
+
+  food-disappoints:
+    title: Food Quality Disappoints
+    description: Customers want real meals, not just pastries from sysco
+
+needs:
+  # Operational Needs
+  reduce-wait-times:
+    description: Reduce average wait time during peak hours to under 3 minutes
+
+  predictable-seating:
+    description: Customers can know if seating is available before arriving
+
+  consistent-training:
+    description: Standardized barista training and quality control across all locations
+
+  local-identity:
+    description: Each location reflects and serves its specific neighborhood
+
+  expanded-food-program:
+    description: Offer substantial, high-quality food options beyond pastries
+
+  # Experience Needs
+  workspace-amenities:
+    description: Provide reliable power, WiFi, and comfortable seating for work
+
+  community-gathering-space:
+    description: Create third-place environments for community events and connection
+
+  mobile-convenience:
+    description: Enable ordering, payment, and rewards through mobile app
+
+  # Business Needs
+  operational-efficiency:
+    description: Reduce labor costs while improving throughput
+
+  brand-differentiation:
+    description: Stand out from Starbucks and independent shops
+
+features:
+  mobile-order-ahead:
+    description: Mobile app with order-ahead and payment
+
+  seating-availability-api:
+    description: Real-time seating availability shown in app
+
+  barista-certification:
+    description: Comprehensive barista certification program with quarterly testing
+
+  local-artist-program:
+    description: Rotating local artist displays and performances at each location
+
+  neighborhood-manager-role:
+    description: Dedicated neighborhood manager who lives in the community
+
+  commercial-espresso-upgrade:
+    description: Upgrade to commercial-grade espresso machines at all locations
+
+  kitchen-retrofit:
+    description: Add full kitchens with local chef partnerships
+
+  coworking-membership:
+    description: Subscription membership for guaranteed seating during work hours
+
+  community-event-hosting:
+    description: Evening event programming (open mics, book clubs, etc.)
+
+  supply-chain-standardization:
+    description: Centralized supply chain with quality control checkpoints

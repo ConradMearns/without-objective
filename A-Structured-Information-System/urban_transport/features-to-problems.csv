@@ -1,0 +1,27 @@
+# Problem Mapping:
+# P00: traffic-congestion - Peak hour gridlock with 45+ minute commutes, costing the economy millions in lost productivity
+# P01: air-pollution - Vehicle emissions cause poor air quality, exceeding EPA standards 60+ days per year
+# P02: transit-unreliable - Buses run late or overcrowded, trains delayed, making transit unusable for time-sensitive trips
+# P03: social-inequity - Low-income residents spend 20%+ of income on transportation, face longest commutes
+# P04: downtown-decline - Retailers struggling due to parking costs, traffic, making suburban malls more attractive
+# P05: bike-safety - Cyclists killed or injured regularly, families won't let kids bike, dedicated infrastructure lacking
+# P06: suburban-sprawl - Car-dependent development spreading, destroying green space, requiring expensive infrastructure
+#
+# Interaction strength values: 5 (strong), 3 (medium), 1 (weak), --- (none/unknown)
+#
+P00,P01,P02,P03,P04,P05,P06,FEATURE
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,highway-expansion
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,congestion-pricing
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,protected-bike-lanes
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,transit-frequency-boost
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,parking-restrictions
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,suburban-park-and-ride
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,mixed-use-zoning
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,free-transit
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,traffic-enforcement
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,electric-bus-conversion
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,employer-transit-subsidies
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,bike-share-expansion
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,road-diet-conversions
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,transit-priority-signals
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ ,parking-price-increase

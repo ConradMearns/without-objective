@@ -1,0 +1,20 @@
+# Need Mapping:
+# N00: reduce-wait-times - Reduce average wait time during peak hours to under 3 minutes
+# N01: predictable-seating - Customers can know if seating is available before arriving
+# N02: consistent-training - Standardized barista training and quality control across all locations
+# N03: local-identity - Each location reflects and serves its specific neighborhood
+# N04: expanded-food-program - Offer substantial, high-quality food options beyond pastries
+# N05: workspace-amenities - Provide reliable power, WiFi, and comfortable seating for work
+# N06: community-gathering-space - Create third-place environments for community events and connection
+# N07: mobile-convenience - Enable ordering, payment, and rewards through mobile app
+# N08: operational-efficiency - Reduce labor costs while improving throughput
+# N09: brand-differentiation - Stand out from Starbucks and independent shops
+#
+# Interaction strength values: 5 (strong), 3 (medium), 1 (weak), --- (none/unknown)
+#
+N00,N01,N02,N03,N04,N05,N06,N07,N08,N09,PROBLEM
+ 5 , 1 , 3 , ~ , ~ , ~ , ~ , 5 , 3 , 1 ,morning-rush-chaos
+ ~ , 5 , ~ , 1 , 3 , 5 , 3 , 1 , ~ , ~ ,remote-worker-homeless
+ 1 , ~ , 5 , 1 , ~ , ~ , ~ , ~ , 3 , 3 ,inconsistent-experience
+ ~ , ~ , 1 , 5 , ~ , ~ , 5 , ~ , ~ , 3 ,neighborhood-disconnect
+ ~ , ~ , 1 , ~ , 5 , ~ , ~ , ~ , 1 , 3 ,food-disappoints

@@ -1,0 +1,23 @@
+# Need Mapping:
+# N00: reduce-commute-times - Reduce average commute time from 45 minutes to 25 minutes
+# N01: improve-air-quality - Meet EPA air quality standards year-round, reduce vehicle emissions by 40%
+# N02: affordable-transportation - Ensure low-income residents spend less than 10% of income on transportation
+# N03: downtown-vitality - Create thriving downtown with easy access for customers and employees
+# N04: safe-cycling-infrastructure - Protected bike lanes and trails where families feel safe cycling
+# N05: transit-reliability - Transit runs on-time 95%+ with frequency under 10 minutes peak, under 20 minutes off-peak
+# N06: parking-availability - Adequate parking for drivers who need it, priced appropriately
+# N07: walkable-neighborhoods - Reduce car dependency by enabling walking/biking for daily needs
+# N08: cost-efficiency - Maximize mobility improvement per taxpayer dollar spent
+# N09: climate-action - Reduce transportation sector carbon emissions to meet climate goals
+# N10: equitable-access - Ensure all neighborhoods have equal access to jobs and services
+#
+# Interaction strength values: 5 (strong), 3 (medium), 1 (weak), --- (none/unknown)
+#
+N00,N01,N02,N03,N04,N05,N06,N07,N08,N09,N10,PROBLEM
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,traffic-congestion
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,air-pollution
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,transit-unreliable
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,social-inequity
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,downtown-decline
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,bike-safety
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,suburban-sprawl

@@ -1,0 +1,31 @@
+# Feature Mapping:
+# F00: highway-expansion - Add 2 lanes to major highways and interchanges ($800M)
+# F01: congestion-pricing - Charge $5-15 to drive downtown during peak hours, managed by automated tolling
+# F02: protected-bike-lanes - Network of physically separated bike lanes on major streets (removes 1 car lane)
+# F03: transit-frequency-boost - Double bus/rail frequency by adding vehicles and drivers ($200M/year operating cost)
+# F04: parking-restrictions - Remove 40% of downtown street parking, convert to bus lanes and bike lanes
+# F05: suburban-park-and-ride - Build 5 large parking lots at suburban transit stations (5000 spaces, $50M)
+# F06: mixed-use-zoning - Allow dense, walkable development near transit (apartments above shops)
+# F07: free-transit - Eliminate all transit fares, funded by taxes ($150M/year revenue loss)
+# F08: traffic-enforcement - Automated speed and red light cameras with $200+ fines
+# F09: electric-bus-conversion - Replace entire diesel bus fleet with electric buses ($400M capital)
+# F10: employer-transit-subsidies - Require large employers to subsidize employee transit passes (tax incentive)
+# F11: bike-share-expansion - 5000-bike dockless bike share system across city ($10M + $3M/year)
+# F12: road-diet-conversions - Convert 4-lane roads to 3-lane (2+center turn) with bike lanes on 20 major streets
+# F13: transit-priority-signals - Traffic signals give green lights to approaching buses/trains
+# F14: parking-price-increase - Triple downtown parking meter rates ($2/hr to $6/hr), enforce strictly
+#
+# Interaction strength values: 5 (strong), 3 (medium), 1 (weak), --- (none/unknown)
+#
+F00,F01,F02,F03,F04,F05,F06,F07,F08,F09,F10,F11,F12,F13,F14,NEED
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,reduce-commute-times
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,improve-air-quality
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,affordable-transportation
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,downtown-vitality
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,safe-cycling-infrastructure
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,transit-reliability
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,parking-availability
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,walkable-neighborhoods
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,cost-efficiency
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,climate-action
+ ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ , ~ ,equitable-access

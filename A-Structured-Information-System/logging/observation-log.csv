@@ -1,0 +1,21 @@
+# Observation Log: Evidence-based relationship tracking
+#
+# Columns:
+# - date: When observation was made (YYYY-MM-DD)
+# - observer: Who made the observation
+# - relationship_type: problem-to-need, need-to-feature, or feature-to-problem
+# - from_item: The source (problem, need, or feature key)
+# - to_item: The target (need, feature, or problem key)
+# - strength: 1 (contributes), -1 (inversely contributes), or 0 (no relationship)
+# - evidence: What was observed/measured
+# - source: Where the evidence came from
+#
+date,observer,relationship_type,from_item,to_item,strength,evidence,source
+2025-11-12,claude,problem-to-need,scoring-subjectivity,evidence-based-scoring,1,Team spent 30 minutes debating whether relationship was 3 or 5 without data,Planning meeting observation
+2025-11-12,conrad,problem-to-need,garbage-in-garbage-out,evidence-based-scoring,1,Output quality depends on input quality - need evidence not opinions,LIMITATIONS.md analysis
+2025-11-12,claude,need-to-feature,evidence-based-scoring,observation-log,1,Log captures real observations with evidence and source,Tool design
+2025-11-12,claude,need-to-feature,evidence-based-scoring,relationship-scoring,-1,5/3/1 scale creates ambiguity about magnitude differences,Literature review of QFD criticisms
+2025-11-12,conrad,need-to-feature,evidence-based-scoring,flat-relationship-scoring,1,Binary exists/doesn't-exist is clearer than magnitude judgment,Design hypothesis
+2025-11-12,claude,problem-to-need,cognitive-biases,diverse-perspectives,1,Multiple observers reduce individual biases,Bias research
+2025-11-12,claude,need-to-feature,diverse-perspectives,observation-log,1,Multiple observers can contribute observations independently,Tool design
+2025-11-12,claude,problem-to-need,time-blindness,dependency-mapping,1,System treats features as independent but some have prerequisites,LIMITATIONS.md

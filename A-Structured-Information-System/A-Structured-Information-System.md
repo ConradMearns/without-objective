@@ -62,3 +62,6 @@ There's still some other features I'm missing so far:
 ---
 
 Didn't explain IBIS is tree based - and that this may actually be an issue. It's hard to use, map, and organize. It also doesn't allow for re-use and cyclical dependencies that are probably realistic
+
+![fig1](./fig1.excalidraw.svg)
+![fig2](./fig2.excalidraw.svg)

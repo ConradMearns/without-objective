@@ -1,0 +1,23 @@
+step: 1
+description: Relative importance scores for step 1
+problems:
+  aggregation-paradox: 0.0
+  missing-customer-voice: 0.0
+  cost-blindness: 0.0
+  time-blindness: 25.0
+  risk-ignorance: 0.0
+  competitive-blindness: 0.0
+  scoring-subjectivity: 25.0
+  cognitive-biases: 25.0
+  static-analysis: 0.0
+  feedback-loop-gaps: 0.0
+  garbage-in-garbage-out: 25.0
+needs:
+  evidence-based-scoring: 57.14285714285714
+  diverse-perspectives: 28.57142857142857
+  dependency-mapping: 14.285714285714285
+  feedback-loop-awareness: 0.0
+features:
+  observation-log: 66.66666666666666
+  relationship-scoring: 0.0
+  flat-relationship-scoring: 33.33333333333333

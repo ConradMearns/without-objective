@@ -1,0 +1,126 @@
+meta:
+  description: |
+    Urban Transportation Policy Planning - A Wicked Problem Example
+
+    This example demonstrates how solutions to one problem can worsen others,
+    requiring negative weights in the planning matrices. Unlike the coffee shop
+    example where features generally complement each other, transportation policy
+    involves fundamental trade-offs where you cannot satisfy all stakeholders.
+
+    Key conflicts:
+    - Highway expansion reduces congestion short-term but induces more driving (makes it worse long-term)
+    - Congestion pricing helps traffic flow but hurts low-income commuters
+    - Bike lanes improve sustainability but reduce car capacity
+    - Parking restrictions boost transit ridership but harm retail
+    - Dense development reduces sprawl but increases local traffic
+
+problems:
+  traffic-congestion:
+    title: Traffic Congestion
+    description: Peak hour gridlock with 45+ minute commutes, costing the economy millions in lost productivity
+
+  air-pollution:
+    title: Air Pollution
+    description: Vehicle emissions cause poor air quality, exceeding EPA standards 60+ days per year
+
+  transit-unreliable:
+    title: Transit Unreliability
+    description: Buses run late or overcrowded, trains delayed, making transit unusable for time-sensitive trips
+
+  social-inequity:
+    title: Transportation Inequity
+    description: Low-income residents spend 20%+ of income on transportation, face longest commutes
+
+  downtown-decline:
+    title: Downtown Business Decline
+    description: Retailers struggling due to parking costs, traffic, making suburban malls more attractive
+
+  bike-safety:
+    title: Bicycle Safety Crisis
+    description: Cyclists killed or injured regularly, families won't let kids bike, dedicated infrastructure lacking
+
+  suburban-sprawl:
+    title: Suburban Sprawl
+    description: Car-dependent development spreading, destroying green space, requiring expensive infrastructure
+
+needs:
+  # Mobility Needs
+  reduce-commute-times:
+    description: Reduce average commute time from 45 minutes to 25 minutes
+
+  improve-air-quality:
+    description: Meet EPA air quality standards year-round, reduce vehicle emissions by 40%
+
+  affordable-transportation:
+    description: Ensure low-income residents spend less than 10% of income on transportation
+
+  downtown-vitality:
+    description: Create thriving downtown with easy access for customers and employees
+
+  safe-cycling-infrastructure:
+    description: Protected bike lanes and trails where families feel safe cycling
+
+  transit-reliability:
+    description: Transit runs on-time 95%+ with frequency under 10 minutes peak, under 20 minutes off-peak
+
+  parking-availability:
+    description: Adequate parking for drivers who need it, priced appropriately
+
+  # Long-term Needs
+  walkable-neighborhoods:
+    description: Reduce car dependency by enabling walking/biking for daily needs
+
+  cost-efficiency:
+    description: Maximize mobility improvement per taxpayer dollar spent
+
+  climate-action:
+    description: Reduce transportation sector carbon emissions to meet climate goals
+
+  equitable-access:
+    description: Ensure all neighborhoods have equal access to jobs and services
+
+features:
+  highway-expansion:
+    description: Add 2 lanes to major highways and interchanges ($800M)
+
+  congestion-pricing:
+    description: Charge $5-15 to drive downtown during peak hours, managed by automated tolling
+
+  protected-bike-lanes:
+    description: Network of physically separated bike lanes on major streets (removes 1 car lane)
+
+  transit-frequency-boost:
+    description: Double bus/rail frequency by adding vehicles and drivers ($200M/year operating cost)
+
+  parking-restrictions:
+    description: Remove 40% of downtown street parking, convert to bus lanes and bike lanes
+
+  suburban-park-and-ride:
+    description: Build 5 large parking lots at suburban transit stations (5000 spaces, $50M)
+
+  mixed-use-zoning:
+    description: Allow dense, walkable development near transit (apartments above shops)
+
+  free-transit:
+    description: Eliminate all transit fares, funded by taxes ($150M/year revenue loss)
+
+  traffic-enforcement:
+    description: Automated speed and red light cameras with $200+ fines
+
+  electric-bus-conversion:
+    description: Replace entire diesel bus fleet with electric buses ($400M capital)
+
+  employer-transit-subsidies:
+    description: Require large employers to subsidize employee transit passes (tax incentive)
+
+  bike-share-expansion:
+    description: 5000-bike dockless bike share system across city ($10M + $3M/year)
+
+  road-diet-conversions:
+    description: Convert 4-lane roads to 3-lane (2+center turn) with bike lanes on 20 major streets
+
+  transit-priority-signals:
+    description: Traffic signals give green lights to approaching buses/trains
+
+  parking-price-increase:
+    description: Triple downtown parking meter rates ($2/hr to $6/hr), enforce strictly

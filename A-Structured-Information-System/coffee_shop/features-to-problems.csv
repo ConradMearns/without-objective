@@ -1,0 +1,20 @@
+# Problem Mapping:
+# P00: morning-rush-chaos - Long lines during peak hours drive customers to competitors
+# P01: remote-worker-homeless - Remote workers need reliable workspace but can't predict availability
+# P02: inconsistent-experience - Quality and atmosphere vary wildly between locations
+# P03: neighborhood-disconnect - Shops feel like generic chains, not community spaces
+# P04: food-disappoints - Customers want real meals, not just pastries from sysco
+#
+# Interaction strength values: 5 (strong), 3 (medium), 1 (weak), --- (none/unknown)
+#
+P00,P01,P02,P03,P04,FEATURE
+ 5 , 1 , ~ , ~ , ~ ,mobile-order-ahead
+ 1 , 5 , ~ , ~ , ~ ,seating-availability-api
+ 3 , ~ , 5 , ~ , ~ ,barista-certification
+ ~ , ~ , 1 , 5 , ~ ,local-artist-program
+ ~ , 1 , 1 , 5 , ~ ,neighborhood-manager-role
+ ~ , ~ , 3 , ~ , 1 ,commercial-espresso-upgrade
+ ~ , ~ , ~ , 1 , 5 ,kitchen-retrofit
+ 1 , 5 , ~ , ~ , ~ ,coworking-membership
+ ~ , ~ , ~ , 5 , ~ ,community-event-hosting
+ 1 , ~ , 5 , ~ , 3 ,supply-chain-standardization
