@@ -1,10 +1,18 @@
 [
   {
     "slug": "example-post",
-    "title": "Example Post",
+    "title": "Structured Log Pipes: A Modern Take on UNIX Philosophy",
     "html": "posts/example-post.html",
     "pdf": "posts/example-post.pdf",
-    "modified": "2025-12-04T11:50:12.514316",
-    "commit": "ba1ef1f"
+    "modified": "2025-12-04T00:00:00",
+    "commit": "eba86b7"
+  },
+  {
+    "slug": "example-post-2",
+    "title": "DUPE Structured Log Pipes: A Modern Take on UNIX Philosophy",
+    "html": "posts/example-post-2.html",
+    "pdf": "posts/example-post-2.pdf",
+    "modified": "2025-12-04T00:00:00",
+    "commit": "eba86b7"
   }
 ]
