@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <body>
+    <h2>Structured Log Pipes: A Modern Take on UNIX Philosophy</h2>
+    <p><em>Published: December 2025</em></p>
+    <h3>Introduction</h3>
+    <p>The UNIX philosophy has guided software design for decades: write programs that do one thing well, work together, and handle text streams. But what if we could improve on this foundation?</p>
+    <p>This post explores how structured logging can modernize the pipe paradigm while maintaining its core benefits.</p>
+    <h3>The Problem with Text</h3>
+    <p>Traditional UNIX pipes rely on unstructured text. Consider this simple pipeline:</p>
+    <pre><code data-lang="bash"><span style="color: #4b69c6">ps</span> aux <span style="color: #d73948">|</span> <span style="color: #4b69c6">grep</span> python <span style="color: #d73948">|</span> <span style="color: #4b69c6">awk</span> <span style="color: #198810">'</span><span style="color: #198810">{print $2}</span><span style="color: #198810">'</span> <span style="color: #d73948">|</span> <span style="color: #4b69c6">xargs</span> kill</code></pre>
+    <p>This works, but it’s fragile. What if a username contains “python”? What if the column layout changes?</p>
+    <h3>A Mathematical View</h3>
+    <p>Let’s formalize this. A traditional pipe is a composition of functions:</p>
+    <p>Where each</p>
+    <p>must parse and serialize text. The error rate grows with each composition:</p>
+    <p>Where</p>
+    <p>is the error rate of parser</p>
+    <p>.</p>
+    <h3>The Structured Alternative</h3>
+    <p>Instead, we use JSON Lines (JSONL) as our universal interface:</p>
+    <pre><code data-lang="python"><span style="color: #74747c">#</span><span style="color: #74747c">!/usr/bin/env python3</span><br><span style="color: #d73948">import</span> json<br><span style="color: #d73948">import</span> sys<br><br><span style="color: #d73948">for</span> line <span style="color: #d73948">in</span> sys.stdin:<br>    event <span style="color: #d73948">=</span> json.<span style="color: #4b69c6">loads</span>(line)<br>    <span style="color: #74747c">#</span><span style="color: #74747c"> Process structured data</span><br>    event[<span style="color: #198810">'</span><span style="color: #198810">processed</span><span style="color: #198810">'</span>] <span style="color: #d73948">=</span> <span style="color: #d73948">True</span><br>    <span style="color: #4b69c6">print</span>(json.<span style="color: #4b69c6">dumps</span>(event))</code></pre>
+    <p>This gives us:</p>
+    <ul>
+      <li>Type safety through schemas</li>
+      <li>Composability through structured data</li>
+      <li>Debuggability through readable formats</li>
+    </ul>
+    <h3>Conclusion</h3>
+    <p>By replacing text with structured data, we preserve UNIX philosophy while fixing its core limitation. The future of composable software is structured.</p>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TypstBlog - Email-Commentable Blog</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+</head>
+<body>
+    <header>
+        <h1>TypstBlog</h1>
+        <p class="tagline">A statically-generated blog with email comments</p>
+    </header>
+
+    <div class="container">
+        <nav id="post-list">
+            <h2>Posts</h2>
+            <div id="nav-posts">
+                <!-- Posts loaded dynamically from manifest.json -->
+            </div>
+        </nav>
+
+        <main id="content">
+            <div class="welcome">
+                <h2>Welcome!</h2>
+                <p>This is a blog built with Typst, HTMX, and a sprinkle of JavaScript.</p>
+                <p>Select a post from the sidebar to get started.</p>
+                <h3>Features:</h3>
+                <ul>
+                    <li>📝 Posts written in <a href="https://typst.app" target="_blank">Typst</a></li>
+                    <li>📄 PDF fallbacks for each post</li>
+                    <li>💬 Email-based commenting (hover over paragraphs!)</li>
+                    <li>🚀 No backend required - fully static</li>
+                </ul>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <p>Built with Typst + HTMX | <a href="https://github.com">Source</a></p>
+    </footer>
+
+    <script src="js/comments.js"></script>
+    <script>
+        // Load post list on page load
+        async function loadPostList() {
+            try {
+                const response = await fetch('manifest.json');
+                const posts = await response.json();
+
+                const navPosts = document.getElementById('nav-posts');
+                navPosts.innerHTML = posts.map(post => `
+                    <div class="post-item">
+                        <a href="#"
+                           hx-get="${post.html}"
+                           hx-target="#content"
+                           hx-swap="innerHTML"
+                           hx-on::after-swap="initComments('${post.slug}', '${post.commit}')">
+                            ${post.title}
+                        </a>
+                        <a href="${post.pdf}" class="pdf-link" title="Download PDF">📄</a>
+                        <div class="post-meta">${new Date(post.modified).toLocaleDateString()}</div>
+                    </div>
+                `).join('');
+
+                // Reinitialize HTMX on dynamically added content
+                htmx.process(navPosts);
+            } catch (error) {
+                console.error('Failed to load posts:', error);
+                document.getElementById('nav-posts').innerHTML =
+                    '<p class="error">Failed to load posts. Run build.py first!</p>';
+            }
+        }
+
+        // Load posts on page ready
+        document.addEventListener('DOMContentLoaded', loadPostList);
+    </script>
+</body>
+</html>
