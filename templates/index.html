@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{SITE_TITLE}}</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>{{SITE_TITLE}}</h1>
+        <p class="tagline">{{TAGLINE}}</p>
+    </header>
+
+    <div class="index-container">
+        <div class="welcome">
+            <h2>Welcome!</h2>
+            <p>This is a blog built with Typst and a sprinkle of JavaScript.</p>
+            <p>Select a post below to get started.</p>
+            <h3>Features:</h3>
+            <ul>
+                <li>📝 Posts written in <a href="https://typst.app" target="_blank">Typst</a></li>
+                <li>📄 PDF fallbacks for each post</li>
+                <li>💬 Email-based commenting (hover over paragraphs!)</li>
+                <li>🚀 No backend required - fully static</li>
+            </ul>
+        </div>
+
+        <div class="posts-grid">{{NAV_ITEMS}}
+        </div>
+    </div>
+
+    <footer>
+        <p>Built with Typst | <a href="https://github.com">Source</a></p>
+    </footer>
+</body>
+</html>

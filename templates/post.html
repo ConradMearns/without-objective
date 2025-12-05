@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{TITLE}} - {{SITE_TITLE}}</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1><a href="../index.html">{{SITE_TITLE}}</a></h1>
+        <p class="tagline">{{TAGLINE}}</p>
+    </header>
+
+    <div class="container">
+        <nav id="post-list">
+            <h2>Posts</h2>
+            <div id="nav-posts">{{NAV_ITEMS}}
+            </div>
+        </nav>
+
+        <main id="content">
+            {{CONTENT}}
+        </main>
+    </div>
+
+    <footer>
+        <p>Built with Typst | <a href="https://github.com">Source</a></p>
+    </footer>
+
+    <script src="../js/comments.js"></script>
+    <script>
+        // Initialize comments on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            initComments('{{POST_SLUG}}', '{{COMMIT}}');
+        });
+    </script>
+</body>
+</html>
