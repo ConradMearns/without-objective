@@ -50,14 +50,6 @@ def get_git_commit():
     )
     return result.stdout.strip() if result.returncode == 0 else "unknown"
 
-def load_template(template_name):
-    """Load an HTML template from the templates directory"""
-    template_path = TEMPLATES_DIR / template_name
-    if not template_path.exists():
-        print(f"⚠️  Template {template_name} not found at {template_path}")
-        sys.exit(1)
-    return template_path.read_text()
-
 def load_posts_yaml():
     """Load and parse posts.yaml configuration"""
     if not POSTS_YAML.exists():
@@ -66,37 +58,67 @@ def load_posts_yaml():
         sys.exit(1)
 
     with open(POSTS_YAML, 'r') as f:
-        config = yaml.safe_load(f)
+        data = yaml.safe_load(f)
 
-    if not config or 'posts' not in config:
+    if not data or 'posts' not in data:
         print("⚠️  posts.yaml must contain a 'posts' list")
         sys.exit(1)
 
-    return config
+    # Extract config with defaults
+    config = data.get('config', {})
+    site_config = {
+        'site_title': config.get('site_title', 'Blog'),
+        'tagline': config.get('tagline', ''),
+        'author': config.get('author', ''),
+        'email': config.get('email', '')
+    }
 
-def create_page_template(title, content, post_slug, commit, post_list):
-    """Wrap post content in a complete HTML page"""
-    # Generate navigation items
-    nav_items = ""
-    for post in post_list:
-        active_class = ' class="active"' if post['slug'] == post_slug else ''
-        # Use just the filename for post-to-post navigation (we're already in posts/ dir)
-        post_filename = Path(post['html']).name
-        pdf_link = f'<a href="{Path(post["pdf"]).name}" class="pdf-link" title="Download PDF">📄</a>' if post.get('pdf') else ''
-        nav_items += f'''
-                <div class="post-item"{active_class}>
-                    <a href="{post_filename}">{post['title']}</a>
-                    {pdf_link}
-                    <div class="post-meta">{datetime.fromisoformat(post['modified']).strftime('%B %d, %Y')}</div>
-                </div>'''
+    return data['posts'], site_config
 
-    # Load and populate the template
-    template = load_template("post.html")
-    return template.replace("{{TITLE}}", title) \
-                   .replace("{{NAV_ITEMS}}", nav_items) \
-                   .replace("{{CONTENT}}", content) \
-                   .replace("{{POST_SLUG}}", post_slug) \
-                   .replace("{{COMMIT}}", commit)
+def create_post_page(title, content, post_slug, commit, site_config):
+    """Create a minimal HTML page that loads nav from manifest.json"""
+    return f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title} - {site_config['site_title']}</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1><a href="../index.html">{site_config['site_title']}</a></h1>
+        <p class="tagline">{site_config['tagline']}</p>
+    </header>
+
+    <div class="container">
+        <nav id="post-list">
+            <h2>Posts</h2>
+            <div id="nav-posts">
+                <!-- Nav loaded by JavaScript from manifest.json -->
+            </div>
+        </nav>
+
+        <main id="content">
+            {content}
+        </main>
+    </div>
+
+    <footer>
+        <p>Built with Typst | <a href="https://github.com">Source</a></p>
+    </footer>
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/comments.js"></script>
+    <script>
+        // Initialize nav and comments on page load
+        document.addEventListener('DOMContentLoaded', () => {{
+            loadNav('{post_slug}');
+            initComments('{post_slug}', '{commit}');
+        }});
+    </script>
+</body>
+</html>'''
 
 def build_post(post_config):
     """Build a single post from YAML configuration"""
@@ -197,30 +219,65 @@ def build_post(post_config):
 
     return post_meta
 
-def generate_manifest(posts):
-    """Generate a JSON manifest of all posts"""
+def generate_manifest(posts, site_config):
+    """Generate a JSON manifest of all posts and site config"""
     # Clean up posts for manifest (remove content field)
     manifest_posts = [{k: v for k, v in p.items() if k != 'content'} for p in posts]
+    manifest = {
+        'site': site_config,
+        'posts': manifest_posts
+    }
     manifest_path = DOCS_DIR / "manifest.json"
-    manifest_path.write_text(json.dumps(manifest_posts, indent=2))
+    manifest_path.write_text(json.dumps(manifest, indent=2))
     print(f"\n✓ Generated manifest with {len(posts)} posts")
 
-def generate_index(posts):
-    """Generate the index.html with post list"""
-    # Generate navigation items
-    nav_items = ""
-    for post in posts:
-        pdf_link = f'<a href="{post["pdf"]}" class="pdf-link" title="Download PDF">📄</a>' if post.get('pdf') else ''
-        nav_items += f'''
-                <div class="post-item">
-                    <a href="{post['html']}">{post['title']}</a>
-                    {pdf_link}
-                    <div class="post-meta">{datetime.fromisoformat(post['modified']).strftime('%B %d, %Y')}</div>
-                </div>'''
+def generate_index(site_config):
+    """Generate a minimal index.html that loads posts from manifest.json"""
+    index_html = f'''<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{site_config['site_title']}</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header>
+        <h1>{site_config['site_title']}</h1>
+        <p class="tagline">{site_config['tagline']}</p>
+    </header>
 
-    # Load and populate the template
-    template = load_template("index.html")
-    index_html = template.replace("{{NAV_ITEMS}}", nav_items)
+    <div class="index-container">
+        <div class="welcome">
+            <h2>Welcome!</h2>
+            <p>This is a blog built with Typst and a sprinkle of JavaScript.</p>
+            <p>Select a post below to get started.</p>
+            <h3>Features:</h3>
+            <ul>
+                <li>📝 Posts written in <a href="https://typst.app" target="_blank">Typst</a></li>
+                <li>📄 PDF fallbacks for each post</li>
+                <li>💬 Email-based commenting (hover over paragraphs!)</li>
+                <li>🚀 No backend required - fully static</li>
+            </ul>
+        </div>
+
+        <div class="posts-grid" id="posts-grid">
+            <!-- Posts loaded by JavaScript from manifest.json -->
+        </div>
+    </div>
+
+    <footer>
+        <p>Built with Typst | <a href="https://github.com">Source</a></p>
+    </footer>
+
+    <script src="js/nav.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {{
+            loadIndexPosts();
+        }});
+    </script>
+</body>
+</html>'''
 
     index_path = DOCS_DIR / "index.html"
     index_path.write_text(index_html)
@@ -230,8 +287,8 @@ def copy_static_assets():
     """Copy static CSS, JS, and other assets to docs directory"""
     print("\n📦 Copying static assets...")
 
-    # Define source directory (legacy location)
-    static_source = SCRIPT_DIR / "TypstBlog" / "dist"
+    # Define source directory
+    static_source = SCRIPT_DIR / "static"
 
     # Copy CSS
     css_src = static_source / "css"
@@ -246,6 +303,13 @@ def copy_static_assets():
         js_dst = DOCS_DIR / "js"
         shutil.copytree(js_src, js_dst, dirs_exist_ok=True)
         print("  ✓ JS files copied")
+
+    # Copy fonts
+    fonts_src = static_source / "fonts"
+    if fonts_src.exists():
+        fonts_dst = DOCS_DIR / "fonts"
+        shutil.copytree(fonts_src, fonts_dst, dirs_exist_ok=True)
+        print("  ✓ Fonts copied")
 
     # Create comments directory
     comments_dst = DOCS_DIR / "comments"
@@ -264,8 +328,7 @@ def main():
     print("🏗️  TypstBlog Builder\n")
 
     # Load posts configuration
-    config = load_posts_yaml()
-    post_configs = config['posts']
+    post_configs, site_config = load_posts_yaml()
 
     if not post_configs:
         print("⚠️  No posts defined in posts.yaml")
@@ -299,12 +362,12 @@ def main():
     # Now generate complete HTML pages for each post
     print("\n📝 Generating complete HTML pages...")
     for post in posts:
-        complete_html = create_page_template(
+        complete_html = create_post_page(
             title=post['title'],
             content=post['content'],
             post_slug=post['slug'],
             commit=post['commit'],
-            post_list=posts
+            site_config=site_config
         )
         html_path = POSTS_DIR / f"{post['slug']}.html"
         html_path.write_text(complete_html)
@@ -315,11 +378,11 @@ def main():
         if fragment_path.exists():
             fragment_path.unlink()
 
-    # Generate manifest
-    generate_manifest(posts)
+    # Generate manifest with site config
+    generate_manifest(posts, site_config)
 
     # Generate index page
-    generate_index(posts)
+    generate_index(site_config)
 
     # Copy static assets
     copy_static_assets()
