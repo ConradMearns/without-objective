@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Structured Log Pipes - Without Objective</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <header>
+        <h1><a href="../index.html">Without Objective</a></h1>
+        <p class="tagline">wip</p>
+    </header>
+
+    <div class="container">
+        <nav id="post-list">
+            <h2>Posts</h2>
+            <div id="nav-posts">
+                <!-- Nav loaded by JavaScript from manifest.json -->
+            </div>
+        </nav>
+
+        <main id="content">
+            <blockquote>
+<p>AI Use Preface:
+I care more about sharing the idea than being a perfect writer - so parts of this article are AI generated.
+You can pm.me hate mail @ to my email address roncad
+Claude helped me write the introductory text here.
+I wrapped what Claude wrote in <code>&lt;claude&gt;</code> and <code>&lt;/claude&gt;</code> tags for honest provenance.
+I may edit the text Claude produces - but will keep the tags. 
+Everything outside of the tags is my own.</p>
+</blockquote>
+<h1>The UNIX Philosophy</h1>
+<blockquote>
+<p>This is the Unix philosophy: 
+Write programs that do one thing and do it well. 
+Write programs to work together. 
+Write programs to handle text streams, because that is a universal interface.
+- Doug McIlroy (2003). The Art of Unix Programming: Basics of the Unix Philosophy</p>
+</blockquote>
+<p><code>&lt;claude Read @README.md - help me expand on these ideas. What is the main benefit and reasoning behind the UNIX philosophy of writing small single purpose scripts? Where does this fall apart? and why isn't it a good solution / used more broadly? Does this new approach help to solve any of these problems?&gt;</code></p>
+<p>The UNIX philosophy's main benefits:
+- <strong>Composability</strong>: Small tools can be combined in unexpected ways
+- <strong>Simplicity</strong>: Each program has a single, clear purpose
+- <strong>Reusability</strong>: Tools can be reused across different contexts
+- <strong>Debuggability</strong>: Easy to test individual components
+- <strong>Flexibility</strong>: Combine tools without rewriting them</p>
+<h1>Where UNIX Pipes Fall Apart</h1>
+<p>Despite their elegance, UNIX pipes have fundamental limitations that prevent broader adoption:</p>
+<h2>1. <strong>Unstructured Text is Brittle</strong></h2>
+<ul>
+<li>Parsing text output (awk, sed, cut) is fragile and error-prone</li>
+<li>No schemas or types—breaking changes are silent</li>
+<li>Whitespace, quotes, and special characters cause endless edge cases</li>
+</ul>
+<h2>2. <strong>Limited Flow Control</strong></h2>
+<ul>
+<li>Linear pipelines only—no branching, fan-out, or fan-in</li>
+<li>Can't easily send output to multiple consumers</li>
+<li>No built-in support for conditional routing</li>
+</ul>
+<h2>3. <strong>Poor Error Handling</strong></h2>
+<ul>
+<li>Exit codes are the only signal (0 or non-zero)</li>
+<li>Error messages go to stderr (unstructured text again)</li>
+<li>Hard to propagate context about what failed and why</li>
+</ul>
+<h2>4. <strong>No State Management</strong></h2>
+<ul>
+<li>Each process is isolated—can't share state without external tools</li>
+<li>No reactivity—can't respond to events or build feedback loops</li>
+<li>Difficult to build stateful, long-running processes</li>
+</ul>
+<h2>5. <strong>Limited Observability</strong></h2>
+<ul>
+<li>Hard to debug multi-stage pipelines</li>
+<li>No structured logging by default</li>
+<li>Can't easily trace data flow through the system</li>
+</ul>
+<p>This is why UNIX pipes work great for simple scripts but struggle in 'enterprise' software where you need:
+- Reactive, event-driven systems
+- Complex branching logic
+- Structured logging and observability
+- Type safety and validation
+- Scalable, long-running processes</p>
+<h1>The Solution: Structured Log Pipes</h1>
+<p>What if we kept the UNIX philosophy of composability but fixed the interface?</p>
+<p><strong>Key insight</strong>: Replace unstructured text with JSONL (JSON Lines)</p>
+<h2>Benefits Over Traditional UNIX Pipes</h2>
+<ol>
+<li><strong>Structured Data</strong>: Type-safe events with schemas (via dataclasses)</li>
+<li><strong>Maintains Composability</strong>: Still uses stdin/stdout—works with existing UNIX tools</li>
+<li><strong>Better Debugging</strong>: JSON is human-readable and machine-parseable</li>
+<li><strong>Foundation for Reactivity</strong>: Structured events enable event-driven patterns</li>
+<li><strong>Language Agnostic</strong>: Any language can emit/consume JSONL</li>
+<li><strong>Incremental Adoption</strong>: Works alongside existing text-based tools</li>
+</ol>
+<p><code>&lt;/claude&gt;</code></p>
+<h2>Current Features</h2>
+<ul>
+<li>JSONL stdout for structured event emission</li>
+<li>Type-safe event parsing (Python dataclasses)</li>
+<li>Composable via UNIX pipes</li>
+</ul>
+<!-- # Features -->
+<h1>Piping structured data in and out of <code>fibwait.py</code></h1>
+<p>I made <code>fibwait.py</code> to illustrate the concept - roughed out but works.</p>
+<pre class="codehilite"><code class="language-bash">without-objective/Structured-Log-Pipes$ ./fibwait.py 
+# {&quot;a&quot;: 1, &quot;b&quot;: 2}
+without-objective/Structured-Log-Pipes$ ./fibwait.py | ./fibwait.py 
+# {&quot;a&quot;: 2, &quot;b&quot;: 3}
+without-objective/Structured-Log-Pipes$ ./fibwait.py | ./fibwait.py | ./fibwait.py
+# {&quot;a&quot;: 3, &quot;b&quot;: 5}
+without-objective/Structured-Log-Pipes$ 
+</code></pre>
+
+<p>The main idea here would be to do all sorts of complex Side-Effect driving work, and then wrap that work in Structured Logging <em>as we should anyway</em>.
+Then, this can be used to control scripts down the line - or simply produce a log of work completed.</p>
+<h2>Problems with</h2>
+<blockquote>
+<p>P: JSONL does look ugly though, it would be nice to have a Logging Format that is slightly more human readable that works for this.</p>
+</blockquote>
+<p><code>logfmt</code> is <em>an</em> alternative - I wont say better but it does at least have good support and colored formatting.</p>
+<blockquote>
+<p>P: The stdin parsing system inside fibwait sucks though, we can't really expect people to write this themselves.</p>
+<p>P: fibwait is a bad example.</p>
+<p>P: Since I'm introducing libraries in scripts - are we just going to expect users to make a venv compatible with new libraries I need??</p>
+</blockquote>
+<h2>New Requirements</h2>
+<blockquote>
+<p>N: Need at a utility file to capture the complexities we are introducing to make this easy to use - otherwise it's too much effort</p>
+<p>N: Let's make a simple Content Addressable Storage example instead of fibwait</p>
+</blockquote>
+<h1>A Better Example - Simple Content Addressable Storage ETL</h1>
+<!-- # Features -->
+
+<h2>Effectual Scripting: Partition Scanning</h2>
+<p>https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies</p>
+<pre class="codehilite"><code class="language-bash">chmod +x scan_partition.py
+uv add --script scan_partition.py pandas
+</code></pre>
+
+<pre class="codehilite"><code class="language-python">#!/usr/bin/env -S uv run --script
+
+# /// script
+# requires-python = &quot;&gt;=3.14&quot;
+# dependencies = [
+#     &quot;pandas&quot;,
+# ]
+# ///
+</code></pre>
+
+<ul>
+<li>[x] ls</li>
+<li>[ ] stat</li>
+<li>[ ] hash</li>
+<li>[ ] 'upload'</li>
+</ul>
+<hr />
+<p>https://pages.cs.wisc.edu/~remzi/Naur.pdf
+https://www.arthropod.software/p/vibe-coding-our-way-to-disaster</p>
+        </main>
+    </div>
+
+    <footer>
+        <p>Built with Typst | <a href="https://github.com">Source</a></p>
+    </footer>
+
+    <script src="../js/nav.js"></script>
+    <script src="../js/comments.js"></script>
+    <script>
+        // Initialize nav and comments on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadNav('structured-log-pipes');
+            initComments('structured-log-pipes', 'ecfeab4');
+        });
+    </script>
+</body>
+</html>

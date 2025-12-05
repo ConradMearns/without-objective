@@ -1,0 +1,46 @@
+{
+  "site": {
+    "site_title": "Without Objective",
+    "tagline": "wip",
+    "author": "Conrad Mearns",
+    "email": "roncad@pm.me"
+  },
+  "posts": [
+    {
+      "slug": "without-objective",
+      "title": "Without Objective",
+      "html": "posts/without-objective.html",
+      "pdf": null,
+      "modified": "2025-03-25T00:00:00",
+      "commit": "ecfeab4",
+      "format": "markdown"
+    },
+    {
+      "slug": "parsing-llm-streams",
+      "title": "Parsing LLM Output Streams",
+      "html": "posts/parsing-llm-streams.html",
+      "pdf": null,
+      "modified": "2025-04-08T00:00:00",
+      "commit": "ecfeab4",
+      "format": "markdown"
+    },
+    {
+      "slug": "organizing-work",
+      "title": "Organizing Work",
+      "html": "posts/organizing-work.html",
+      "pdf": null,
+      "modified": "2025-12-04T00:00:00",
+      "commit": "ecfeab4",
+      "format": "markdown"
+    },
+    {
+      "slug": "structured-log-pipes",
+      "title": "Structured Log Pipes",
+      "html": "posts/structured-log-pipes.html",
+      "pdf": null,
+      "modified": "2025-12-04T00:00:00",
+      "commit": "ecfeab4",
+      "format": "markdown"
+    }
+  ]
+}

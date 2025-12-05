@@ -1,0 +1,35 @@
+posts:
+  - slug: without-objective
+    title: "Without Objective"
+    source: ./
+    main_file: 2025-03-25-Without-Objective.md
+    format: markdown
+    date: 2025-03-25
+
+  - slug: parsing-llm-streams
+    title: "Parsing LLM Output Streams"
+    source: 2025-04-08-Parsing-LLM-Output-Streams
+    main_file: post.md
+    format: markdown
+    date: 2025-04-08
+
+  - slug: organizing-work
+    title: "Organizing Work"
+    source: .
+    main_file: Organizing-Work.md
+    format: markdown
+    date: 2025-12-04
+
+  - slug: structured-log-pipes
+    title: "Structured Log Pipes"
+    source: Structured-Log-Pipes
+    main_file: README.md
+    format: markdown
+    date: 2025-12-04
+
+# Global configuration
+config:
+  author: "Conrad Mearns"
+  email: "roncad@pm.me"
+  site_title: "Without Objective"
+  tagline: "wip"
