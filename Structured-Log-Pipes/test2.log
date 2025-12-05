@@ -1,0 +1,59 @@
+[12/03/25 16:44:26] INFO     at=INFO event_type=FileDiscovered posix_path=/home/conrad/Pictures/output.jpg         slap.py:30
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/Marrus_orthocanna_crop.jpg                                     
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/signal-2023-03-19-18-33-06-975.mp4           
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20250403-122358.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/IMG_2815.mp4                                 
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20230809-173737.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20230313-161615.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20241007-222113.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20250403-121901.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20241002-153922.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20250403-123406.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20241004-110547.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20250228-114142.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20241204-081904.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20230205-102552.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20240926-220437.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20220721-205610.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20250108-175057.mp4                   
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/IMG_2837.mp4                                 
+                             entry=/home/conrad/Pictures                                                                     
+                    INFO     at=INFO event_type=FileDiscovered                                                     slap.py:30
+                             posix_path=/home/conrad/Pictures/xperia-iii/Movies/screen-20250228-081006.mp4                   
+                             entry=/home/conrad/Pictures                                                                     

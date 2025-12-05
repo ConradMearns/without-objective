@@ -1,0 +1,9 @@
+[12/03/25 08:57:43] ERROR    at=ERROR msg=hello alpha=1                                                  scan_partition.py:39
+                    ERROR    at=ERROR token="Hello, World!"                                              scan_partition.py:40
+                    DEBUG    at=DEBUG msg="This is a debug message."                                     scan_partition.py:43
+                    INFO     at=INFO msg="This is an info message."                                      scan_partition.py:44
+                    WARNING  at=WARNING msg="This is a warning message."                                 scan_partition.py:45
+                    ERROR    at=ERROR msg="This is an error message."                                    scan_partition.py:46
+                    CRITICAL at=CRITICAL msg="This is a critical message."                               scan_partition.py:47
+                    INFO     at=INFO msg="AnEvent(data='ahhhh haha')"                                    scan_partition.py:54
+                    INFO     at=INFO event_type=AnEvent data="ahhhh haha"                                scan_partition.py:58
