@@ -4,32 +4,21 @@
 # requires-python = ">=3.14"
 # dependencies = [
 #     "logfmter",
+#     "logfmt",
 #     "pandas",
 #     "rich",
 # ]
 # ///
 
-
-from dataclasses import dataclass
-import logging
 import os
 from pathlib import Path
-from slap import setup_logging, log_event
+from slap import setup_logging, log_kw
 
 setup_logging()
 
-@dataclass
-class FileDiscovered:
-    posix_path: str
-    entry: str
-
-count = 0
-
 root_directory = Path("~/Pictures/").expanduser().as_posix()
 
-all_files = []
 for root, _, files in os.walk(root_directory):
     for file in files:
         file_path = os.path.join(root, file)
-        log_event(FileDiscovered(file_path, root_directory))
-
+        log_kw("File Discovered", entry=file_path, root=root_directory)

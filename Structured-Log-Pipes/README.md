@@ -119,13 +119,25 @@ Then, this can be used to control scripts down the line - or simply produce a lo
 
 > N: Let's make a simple Content Addressable Storage example instead of fibwait
 
+A very nice feature I hadn't thought about until now -
+because we are relying on logging, we can write to stdout _and_ file pretty easily.
+
+> N: If we are writing to logfiles, how do we handle parallel processes?
+
+> F: Slapping a PID to the filename has been good enough so far -
+> treating 'logs' as a collection also helps. _Expect_ that querying is the interface
 
 # A Better Example - Simple Content Addressable Storage ETL
 <!-- # Features -->
 
 ## Effectual Scripting: Partition Scanning
 
-https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies
+
+
+Firstly, I just learned that [UV allows dependencies to be declared in situ](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies)
+and this is easily the coolest and most needed technologies ever.
+
+Let's make a simple `ls` replacement using structured logging:
 
 ```bash
 chmod +x scan_partition.py
@@ -138,11 +150,120 @@ uv add --script scan_partition.py pandas
 # /// script
 # requires-python = ">=3.14"
 # dependencies = [
+#     "logfmter",
 #     "pandas",
+#     "rich",
 # ]
 # ///
+
+import os
+from pathlib import Path
+from slap import setup_logging, log_kw
+
+setup_logging()
+
+root_directory = Path("~/Pictures/").expanduser().as_posix()
+
+for root, _, files in os.walk(root_directory):
+    for file in files:
+        file_path = os.path.join(root, file)
+        log_kw("File Discovered", entry=file_path, root=root_directory)
 ```
 
+The script is simple - and mostly relies on outsourcing our logging to the `slap` file - which handles saving to file as well now.
+
+This allows us to make a _very_ rudimentary event sourcing log.
+
+Obviously - these can't be used _quite_ like an event sourcing database.
+We can re-run this script over and over again - only to find it reproducing events that exist in older files.
+Events in this log are not idempotent - and this is fine.
+
+We're looking for something easy after all - but consider what this gives us:
+
+When we build a more complex ETL pipeline, we are automatically saving a context of work accomplished. If we get smart about querying this data, we can automate some of the control plane without having to define additional files and filetypes.
+
+Let's continue this pipeline to see what I mean (because I don't know the answer yet either).
+
+I have copied all of the photos off of my phone and put them on this laptop to scan. I want to upload them to a Content Addressable Storage, and collect some information about what I have so that I can make predictions about future work.
+
+My Operating System and File System knows what files exist - but I don't.
+To solve for this, we introduced a simple `ls` replacement. 
+This scans our files and dumps what we learn into a myriad of logfiles.
+
+We want to use these logfiles to schedule new work - so first let's think about the work we want to do:
+
+1. How much data do I have? Based on file sizes, is there anything surprising?
+2. How many unique file types are there? I know I have a lot of images and some video. What about PDF's and DOCX?
+3. How many duplicate files do I have? Hopefully not many - but we can hash our data and find out.
+4. 'Uploading' the data is likely going to be error prone - simply because I'm on a laptop, the process will be long, and I might forget to plug my laptop back in while it processes. Before you comment to suggest I do something else - imagine being a company running a similar process at scale when boom - Cloudflare, AWS, or Starlink go down. Can you're software handle the inevitable failures of the infrastructure surrounding it?
+
+To start - let's acquire some initial info. I ran the `scan_partition.py` script twice and killed it early both times to ensure I had some duplicate events in my `logs/` folder - and that everything is working. 
+I'll commit those logs - idk about the rest yet.
+
+We'll make a new tiny script called `stat_partition.py` and set it up similarly.
+We'll also add some magic to `slap.py` so that we can read in these logs and deduplicate them for reading.
+
+```python
+#!/usr/bin/env -S uv run --script
+
+# /// script
+# requires-python = ">=3.14"
+# dependencies = [
+#     "logfmter",
+#     "logfmt",
+#     "pandas",
+#     "rich",
+# ]
+# ///
+
+import os
+from pathlib import Path
+from slap import read_logs, setup_logging, log_kw
+from datetime import datetime
+
+setup_logging()
+
+log_snapshot = read_logs()
+
+print(len(log_snapshot['File Discovered']))
+
+for discovery in log_snapshot['File Discovered']:
+    file_path = discovery['entry']
+    root = discovery['root']
+
+    # one way to pro-actively guard against duplicating work
+    if 'File Stat Collected' in log_snapshot:
+        already_collected = any(stat['entry'] == file_path for stat in log_snapshot['File Stat Collected'])
+        if already_collected:
+            continue
+
+    try:
+        stat_info = os.stat(file_path)
+
+        file_size = stat_info.st_size
+        modified_time = datetime.fromtimestamp(stat_info.st_mtime).isoformat()
+        created_time = datetime.fromtimestamp(stat_info.st_ctime).isoformat()
+        file_ext = Path(file_path).suffix.lower()
+
+        log_kw(
+            "File Stat Collected",
+            entry=file_path,
+            root=root,
+            size_bytes=file_size,
+            extension=file_ext,
+            modified=modified_time,
+            created=created_time,
+        )
+    except (OSError, PermissionError) as e:
+        log_kw("File Stat Error", entry=file_path, error=str(e))
+```
+
+The cool bit here is that we can query our logs to determine if we want to re-do work again or not.
+
+![alt text](image.png)
+
+
+---
 
 - [x] ls
 - [ ] stat
