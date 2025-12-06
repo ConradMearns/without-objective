@@ -19,9 +19,7 @@ setup_logging()
 
 log_snapshot = read_logs()
 
-print(len(log_snapshot['File Discovered']))
-
-for discovery in log_snapshot['File Discovered']:
+for discovery in log_snapshot.get('File Discovered', []):
     file_path = discovery['entry']
     root = discovery['root']
 
@@ -49,4 +47,4 @@ for discovery in log_snapshot['File Discovered']:
             created=created_time,
         )
     except (OSError, PermissionError) as e:
-        log_kw("File Stat Error", entry=file_path, error=str(e))
+        log_kw("File Stat Error", err=True, entry=file_path, error=str(e))

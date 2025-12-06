@@ -1,11 +1,23 @@
-> AI Use Preface:
-> I care more about sharing the idea than being a perfect writer - so parts of this article are AI generated.
-> You can pm.me hate mail @ to my email address roncad
-> Claude helped me write the introductory text here.
-> I wrapped what Claude wrote in `<claude>` and `</claude>` tags for honest provenance.
-> I may edit the text Claude produces - but will keep the tags. 
-> Everything outside of the tags is my own.
+# Small Preface
 
+I had initially written a small blurb about how I was allowing AI to write the first half of this article - 
+a measure I could take to ensure you - the reader - had the appropriate knowledge and understanding of the
+why, what, how, of the UNIX Philosophy.
+
+I expressed in my little prompt my opinion for why it breaks down for large projects,
+and why the UNIX philosophy isn't a tool we can appropriately apply to software write large (even small and medium software frankly)
+
+And I even went as far as to fence the AI text from the rest - explaining what you could skip, and what was not my own.
+
+I don't think care enough about informing you of any context you might be missing anymore -
+it really serves _no_ purpose to have AI write anything for me. You can have AI write the same for yourself.
+
+I no longer feel a need or responsibility to be a great writer - 
+I no longer feel a need to provide my peers with the perfect conceptual framework of my understanding of a topic before I offer them a rant or ramble.
+
+Now more than ever - it's kind of on you to explore and find that information, whether you use AI to help is a personal choice.
+
+So I've removed the AI text from this article - it's in git if you care, though I don't see why you would.
 
 # The UNIX Philosophy
 
@@ -15,93 +27,71 @@
 > Write programs to handle text streams, because that is a universal interface.
 > - Doug McIlroy (2003). The Art of Unix Programming: Basics of the Unix Philosophy
 
-`<claude Read @README.md - help me expand on these ideas. What is the main benefit and reasoning behind the UNIX philosophy of writing small single purpose scripts? Where does this fall apart? and why isn't it a good solution / used more broadly? Does this new approach help to solve any of these problems?>`
+The UNIX Philosophy is one of those things... It's clean, appealing, and hard to argue against.
 
-The UNIX philosophy's main benefits:
-- **Composability**: Small tools can be combined in unexpected ways
-- **Simplicity**: Each program has a single, clear purpose
-- **Reusability**: Tools can be reused across different contexts
-- **Debuggability**: Easy to test individual components
-- **Flexibility**: Combine tools without rewriting them
+I rarely see 'good' software with the UNIX Philosophy applied.
 
-# Where UNIX Pipes Fall Apart
+Do we care that `ls` in coreutils [is over 4000 LoC](https://github.com/wertarbyte/coreutils/blob/master/src/ls.c) ?
 
-Despite their elegance, UNIX pipes have fundamental limitations that prevent broader adoption:
+No, no honestly I could care less.
 
-## 1. **Unstructured Text is Brittle**
-- Parsing text output (awk, sed, cut) is fragile and error-prone
-- No schemas or types—breaking changes are silent
-- Whitespace, quotes, and special characters cause endless edge cases
+I don't mean to be indifferent,
+it's just that whatever effect the UNIX Philosophy had on me has faded over the years.
 
-## 2. **Limited Flow Control**
-- Linear pipelines only—no branching, fan-out, or fan-in
-- Can't easily send output to multiple consumers
-- No built-in support for conditional routing
+A few contenders have come into the scene since then -
+namely PowerShell and nushell -
+which aim to prove the principals of the philosophy by introducing structured text as the interface between functions and scripts.
 
-## 3. **Poor Error Handling**
-- Exit codes are the only signal (0 or non-zero)
-- Error messages go to stderr (unstructured text again)
-- Hard to propagate context about what failed and why
+As much as I hate using PowerShell, they got that one right.
 
-## 4. **No State Management**
-- Each process is isolated—can't share state without external tools
-- No reactivity—can't respond to events or build feedback loops
-- Difficult to build stateful, long-running processes
+However I still have issues using these shells because I can't always predict the shape and schema of data before it gets passed around.
+Or worse, I'm dealing with a system which is so flaky that I can't ever trust a simple script to build me a list of remote resources before it's network craps out again.
 
-## 5. **Limited Observability**
-- Hard to debug multi-stage pipelines
-- No structured logging by default
-- Can't easily trace data flow through the system
+A lot of my frustrations, and the unique environment I've been working in for the past 5 years has continued to push me down a path of Effectual Event Sourcing.
 
-This is why UNIX pipes work great for simple scripts but struggle in 'enterprise' software where you need:
-- Reactive, event-driven systems
-- Complex branching logic
-- Structured logging and observability
-- Type safety and validation
-- Scalable, long-running processes
+So - this is a simple example of what exactly I mean by that.
 
-# The Solution: Structured Log Pipes
+Instead of relying on the _output_ of a script to match the correct schema for a different script - 
+Let's try and get a little more explicit about what our data and systems are trying to do.
 
-What if we kept the UNIX philosophy of composability but fixed the interface?
+Within any system, there are _Events_ and _Reactions to those Events_.
+In this example, we will preform a bit of effectual work, and emit an event in the form of a structured log.
+This structured log can be saved to file, or it can be piped into other scripts for them to react to those events.
 
-**Key insight**: Replace unstructured text with JSONL (JSON Lines)
+If a task is genuinely too complex to be captured by one of these events - that's fine.
+We can bridge our past practices like building Sqlite Databases, dumping NPY binaries, or orchestrating services on remote hosts the same as we ever have...
+Only now, we can log the _fact_ of the effect and rely on the _fact_ to mean something.
+Save a giant NPY binary? Great - just log where you put the file, and now any downstream process you create can find and retrieve it. 
+> This again is a problem people _still_ haven't quite figured out when building fully scaled applications so who knows if this is actually helpful.
 
-## Benefits Over Traditional UNIX Pipes
+The goal here isn't to create a perfect Event Sourcing application - rather, just express _what we could be doing_ with Structured Logging and the UNIX Philosophy.
 
-1. **Structured Data**: Type-safe events with schemas (via dataclasses)
-2. **Maintains Composability**: Still uses stdin/stdout—works with existing UNIX tools
-3. **Better Debugging**: JSON is human-readable and machine-parseable
-4. **Foundation for Reactivity**: Structured events enable event-driven patterns
-5. **Language Agnostic**: Any language can emit/consume JSONL
-6. **Incremental Adoption**: Works alongside existing text-based tools
 
-`</claude>`
-
-## Current Features
+# Sprint 1 - Goals
 
 - JSONL stdout for structured event emission
 - Type-safe event parsing (Python dataclasses)
 - Composable via UNIX pipes
 
-<!-- # Features -->
-# Piping structured data in and out of `fibwait.py`
+## Features: Piping structured data in and out of `fibwait.py`
 
 I made `fibwait.py` to illustrate the concept - roughed out but works.
 
 ```bash
 without-objective/Structured-Log-Pipes$ ./fibwait.py 
 # {"a": 1, "b": 2}
+
 without-objective/Structured-Log-Pipes$ ./fibwait.py | ./fibwait.py 
 # {"a": 2, "b": 3}
+
 without-objective/Structured-Log-Pipes$ ./fibwait.py | ./fibwait.py | ./fibwait.py
 # {"a": 3, "b": 5}
-without-objective/Structured-Log-Pipes$ 
 ```
 
 The main idea here would be to do all sorts of complex Side-Effect driving work, and then wrap that work in Structured Logging _as we should anyway_.
 Then, this can be used to control scripts down the line - or simply produce a log of work completed.
 
-## Problems with 
+## Problems with...
 
 > P: JSONL does look ugly though, it would be nice to have a Logging Format that is slightly more human readable that works for this.
 
@@ -113,7 +103,7 @@ Then, this can be used to control scripts down the line - or simply produce a lo
 
 > P: Since I'm introducing libraries in scripts - are we just going to expect users to make a venv compatible with new libraries I need??
 
-## New Requirements
+## New Requirements (Needs)
 
 > N: Need at a utility file to capture the complexities we are introducing to make this easy to use - otherwise it's too much effort
 
@@ -127,12 +117,11 @@ because we are relying on logging, we can write to stdout _and_ file pretty easi
 > F: Slapping a PID to the filename has been good enough so far -
 > treating 'logs' as a collection also helps. _Expect_ that querying is the interface
 
-# A Better Example - Simple Content Addressable Storage ETL
-<!-- # Features -->
+# A Better Example - File Scanning
+
+> at this point my organization broke down. oh well
 
 ## Effectual Scripting: Partition Scanning
-
-
 
 Firstly, I just learned that [UV allows dependencies to be declared in situ](https://docs.astral.sh/uv/guides/scripts/#declaring-script-dependencies)
 and this is easily the coolest and most needed technologies ever.
@@ -260,17 +249,88 @@ for discovery in log_snapshot['File Discovered']:
 
 The cool bit here is that we can query our logs to determine if we want to re-do work again or not.
 
-![alt text](image.png)
+After re-mangling the `slap.py` file we can support piping again - which get's us a full scan and stat system.
 
+Since we are obviously still building our pipeline, we can rely on our saved logs to pipe directly into the future components as well.
+
+To test this out, we'll create a `hash_items.py` script and `cat` an older log into it.
+
+`cat logs/114174_20251206_112355_scan_partition.log | ./hash_items.py`
+
+
+```
+./analyze_data.py 
+
+═══ File System Analysis ═══
+
+╭─────── Overview ──────────────────────────────╮
+│ Files Discovered: 11457                       │
+│ Files Stat'd: 11457                           │
+│ Files Hashed: 11457                           │
+╰───────────────────────────────────────────────╯
+╭── File Size Statistics ──╮
+│ Total Size: 27.36 GB     │
+│ Min Size: 0.00 B         │
+│ Max Size: 747.73 MB      │
+│ Avg Size: 2.45 MB        │
+╰──────────────────────────╯
+           File Type Distribution            
+┏━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━┳━━━━━━━━━━━━┓
+┃ Extension            ┃ Count ┃ Percentage ┃
+┡━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━╇━━━━━━━━━━━━┩
+│ .jpg                 │  9173 │      80.1% │
+│ .png                 │  1343 │      11.7% │
+│ .mp4                 │   484 │       4.2% │
+│ .dng                 │   184 │       1.6% │
+│ .pdf                 │    93 │       0.8% │
+│ True                 │    28 │       0.2% │
+│ .jpeg                │    28 │       0.2% │
+│ .m4a                 │    26 │       0.2% │
+│ .txt                 │    12 │       0.1% │
+│ .heic                │    11 │       0.1% │
+│ .epub                │    10 │       0.1% │
+│ .apk                 │    10 │       0.1% │
+│ .md                  │     9 │       0.1% │
+│ .ogg                 │     8 │       0.1% │
+│ .json                │     6 │       0.1% │
+└──────────────────────┴───────┴────────────┘
+... and 15 more extension types
+
+╭────── Duplicate Analysis ───────────────────╮
+│ Unique Duplicate Content: 115               │
+│ Total Duplicate Files: 293                  │
+│ Extra Copies: 178                           │
+│ Wasted Space: 76.80 MB                      │
+╰─────────────────────────────────────────────╯
+                   Top Duplicated Files                   
+┏━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━┳━━━━━━━━━━━┳━━━━━━━━━━━━━━┓
+┃ Hash (first 16)    ┃ Copies ┃ Size Each ┃ Total Wasted ┃
+┡━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━╇━━━━━━━━━━━╇━━━━━━━━━━━━━━┩
+│ 20b4ef66dda6f204   │     11 │  39.82 KB │    398.21 KB │
+│ 080b2ec50ee57da5   │     11 │  48.28 KB │    482.81 KB │
+│ 786a02f742015903   │      7 │    0.00 B │       0.00 B │
+│ 6253e8502ba8217b   │      5 │ 522.07 KB │      2.04 MB │
+│ 7abc4f7bfab7bb0c   │      5 │ 380.27 KB │      1.49 MB │
+│ 430493f5b07d416b   │      5 │  79.53 KB │    318.14 KB │
+│ dc15f27fcc77f8ee   │      5 │ 410.99 KB │      1.61 MB │
+│ c27dba9016682923   │      5 │  90.54 KB │    362.16 KB │
+│ 55fe95e6d04a45fa   │      5 │ 971.39 KB │      3.79 MB │
+│ a7306fca39dd9265   │      5 │ 433.78 KB │      1.69 MB │
+└────────────────────┴────────┴───────────┴──────────────┘
+```
 
 ---
 
-- [x] ls
-- [ ] stat
-- [ ] hash
-- [ ] 'upload'
+There's really nothing all that special here, and that's what's so exciting about the approach.
+With a bit more polish and some LLM tooling, this can easily replace a few more complicated ETL systems I've developed in the past.
+
+Granted - this is primarily for `Novel` and `Viable` software - not anything more. 
+Though, because we are effectively using this to drive an event-based reaction system, 
+we can easily use these logs to rebuild Database state (similar to Xpressfeed or other commercial database transfer tools.)
 
 ---
+
+Further reading ?
 
 https://pages.cs.wisc.edu/~remzi/Naur.pdf
 https://www.arthropod.software/p/vibe-coding-our-way-to-disaster
