@@ -334,3 +334,7 @@ Further reading ?
 
 https://pages.cs.wisc.edu/~remzi/Naur.pdf
 https://www.arthropod.software/p/vibe-coding-our-way-to-disaster
+
+---
+
+Comments? DM me, call me, or [reply on the bsky post](https://bsky.app/profile/conradmearns.bsky.social/post/3m7dv6edo4k2f)
