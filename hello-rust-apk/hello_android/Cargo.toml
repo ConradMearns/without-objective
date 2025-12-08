@@ -8,6 +8,12 @@ crate-type = ["cdylib"]
 
 [dependencies]
 android-activity = { version = "0.6", features = ["native-activity"] }
+egui = "0.29"
+egui-winit = "0.29"
+egui-wgpu = "0.29"
+winit = "0.30"
+wgpu = "23"
+pollster = "0.3"
 
 [package.metadata.android]
 package = "com.example.hello_android"

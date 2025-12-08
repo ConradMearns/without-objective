@@ -104,3 +104,13 @@ cargo apk build
 # cargo apk build --release
 # APK will be in: target/release/apk/hello_android.apk
 ```
+
+
+
+
+---
+
+
+Sources:
+- https://github.com/matthewjberger/wgpu-example - Minimal example of Rust, wgpu, and egui for multiple platforms including Android
+- https://github.com/inferrna/hello_world_android_egui - Egui + winit + wgpu Android example
