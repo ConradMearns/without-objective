@@ -1,0 +1,31 @@
+metadata:
+  timestamp: '20251212_144058'
+  model: meta-llama/llama-3.1-8b-instruct
+  type_signature: 'def fibonacci(n: int) -> int'
+  max_iterations: 3
+  total_time_seconds: 5.226
+  final_type_check_passed: true
+iterations:
+- iteration: 0
+  type: initial_generation
+  time_seconds: 0.324
+  type_check_passed: false
+  type_checker_output: "error[invalid-return-type]: Return type does not match returned\
+    \ value\n  --> Code-Generation\\refinements\\20251212_144058\\temp_check.py:12:16\n\
+    \   |\n10 |     \"\"\"\n11 |     if n <= 0:\n12 |         return \"Input should\
+    \ be a positive integer.\"\n   |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\
+    \ expected `int`, found `Literal[\"Input should be a positive integer.\"]`\n13\
+    \ |     elif n == 1:\n14 |         return 0\n   |\n  ::: Code-Generation\\refinements\\\
+    20251212_144058\\temp_check.py:1:26\n   |\n 1 | def fibonacci(n: int) -> int:\n\
+    \   |                          --- Expected `int` because of return type\n 2 |\
+    \     \"\"\"\n 3 |     Calculate the nth number in the Fibonacci sequence.\n \
+    \  |\ninfo: rule `invalid-return-type` is enabled by default\n\nFound 1 diagnostic\n"
+  file: 20251212_144058\iteration_0_initial.py
+- iteration: 1
+  type: refinement
+  time_seconds: 4.902
+  type_check_passed: true
+  type_checker_output: 'All checks passed!
+
+    '
+  file: 20251212_144058\iteration_1_refined.py
