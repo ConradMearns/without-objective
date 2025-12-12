@@ -93,3 +93,13 @@ The script uses DSPy with OpenRouter (defaults to Claude 3.5 Sonnet).
 
 https://arxiv.org/abs/2511.09030
 
+uv run Code-Generation/maker.py --model openrouter/qwen/qwen3-8b
+
+Qwen2.5-0.5B
+Gemma 270M
+Qwen3-0.6B
+phi-3.5-mini
+tinyllama
+openelm
+smollm
+mobilellama
