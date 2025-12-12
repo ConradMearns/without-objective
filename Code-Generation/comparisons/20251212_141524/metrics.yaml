@@ -1,0 +1,72 @@
+metadata:
+  timestamp: '20251212_141524'
+  type_signature: 'def fibonacci(n: int) -> int'
+  models_tested: 7
+results:
+- model: claude-3.5-sonnet
+  model_id: openrouter/anthropic/claude-3.5-sonnet
+  tier: large
+  success: true
+  time_seconds: 0.371
+  usage:
+    prompt_tokens: 0
+    completion_tokens: 0
+    total_tokens: 0
+  output_file: 20251212_141524\claude-3.5-sonnet.py
+- model: gpt-4
+  model_id: openrouter/openai/gpt-4
+  tier: large
+  success: true
+  time_seconds: 0.006
+  usage:
+    prompt_tokens: 0
+    completion_tokens: 0
+    total_tokens: 0
+  output_file: 20251212_141524\gpt-4.py
+- model: claude-3-haiku
+  model_id: openrouter/anthropic/claude-3-haiku
+  tier: medium
+  success: true
+  time_seconds: 0.002
+  usage:
+    prompt_tokens: 0
+    completion_tokens: 0
+    total_tokens: 0
+  output_file: 20251212_141524\claude-3-haiku.py
+- model: gpt-3.5-turbo
+  model_id: openrouter/openai/gpt-3.5-turbo
+  tier: medium
+  success: true
+  time_seconds: 0.002
+  usage:
+    prompt_tokens: 0
+    completion_tokens: 0
+    total_tokens: 0
+  output_file: 20251212_141524\gpt-3.5-turbo.py
+- model: llama-3.1-8b
+  model_id: openrouter/meta-llama/llama-3.1-8b-instruct
+  tier: small
+  success: true
+  time_seconds: 0.001
+  usage:
+    prompt_tokens: 0
+    completion_tokens: 0
+    total_tokens: 0
+  output_file: 20251212_141524\llama-3.1-8b.py
+- model: mistral-7b
+  model_id: openrouter/mistralai/mistral-7b-instruct
+  tier: small
+  success: true
+  time_seconds: 0.002
+  usage:
+    prompt_tokens: 0
+    completion_tokens: 0
+    total_tokens: 0
+  output_file: 20251212_141524\mistral-7b.py
+- model: qwen-7b
+  model_id: openrouter/qwen/qwen-2-7b-instruct
+  tier: small
+  success: false
+  time_seconds: 8.441
+  error: 'litellm.NotFoundError: NotFoundError: OpenrouterException - {"error":{"message":"No
+    endpoints found for qwen/qwen-2-7b-instruct.","code":404},"user_id":"user_2uKGogF4mb0LlzSeVz43jxjDjMo"}'
