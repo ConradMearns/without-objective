@@ -15,6 +15,9 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 from rich.console import Console
+from rich.progress import Progress, SpinnerColumn, TextColumn
+from rich.live import Live
+from rich.table import Table
 
 console = Console()
 
@@ -25,13 +28,15 @@ class SingleStepTask(dspy.Signature):
     current_state = dspy.InputField(desc="Current state")
     previous_action = dspy.InputField(desc="Previous action taken")
 
-    next_action = dspy.OutputField(desc="Next action to take")
-    next_state = dspy.OutputField(desc="Resulting state")
+    next_action = dspy.OutputField(desc="Next action to take in format [disk, from_peg, to_peg]")
+    next_state = dspy.OutputField(desc="Resulting state as valid Python list with EXACTLY 3 sublists: [[peg0], [peg1], [peg2]]")
 
 # 2. RED-FLAGGING validator
 def is_valid_response(response, max_tokens=750):
     """Check if response should be red-flagged."""
     try:
+        import ast
+
         # Validate structure - response is a Prediction object
         if not hasattr(response, 'next_action') or not hasattr(response, 'next_state'):
             return False
@@ -46,22 +51,38 @@ def is_valid_response(response, max_tokens=750):
         if action_tokens + state_tokens > max_tokens:
             return False
 
+        # Validate that next_state is parseable as valid Python
+        try:
+            state = ast.literal_eval(str(response.next_state))
+            # Check it's a list of 3 lists (for Tower of Hanoi)
+            if not isinstance(state, list) or len(state) != 3:
+                return False
+            if not all(isinstance(peg, list) for peg in state):
+                return False
+        except (ValueError, SyntaxError):
+            # State string is malformed
+            return False
+
         return True
     except Exception:
         return False
 
 # 3. VOTING MODULE with first-to-ahead-by-k
 class VotingPredictor(dspy.Module):
-    def __init__(self, k=3, temperature=0.1):
+    def __init__(self, k=3, temperature=0.1, max_votes=20, verbose=False):
         super().__init__()
         self.predictor = dspy.ChainOfThought(SingleStepTask)
         self.k = k
         self.temperature = temperature
+        self.max_votes = max_votes
+        self.verbose = verbose
 
     def forward(self, strategy, current_state, previous_action):
         votes = {}  # Maps candidate -> count
+        total_samples = 0
+        red_flags = 0
 
-        while True:
+        while total_samples < self.max_votes:
             # Sample with temperature (first call at temp=0)
             temp = 0 if len(votes) == 0 else self.temperature
 
@@ -72,13 +93,21 @@ class VotingPredictor(dspy.Module):
                     previous_action=previous_action
                 )
 
+            total_samples += 1
+
             # Red-flag check
             if not is_valid_response(response):
+                red_flags += 1
+                if self.verbose:
+                    console.print(f"[yellow]  Red flag #{red_flags}: action={response.next_action}, state={response.next_state}[/yellow]")
                 continue  # Resample
 
             # Create candidate key (action + state tuple)
             candidate = (response.next_action, response.next_state)
             votes[candidate] = votes.get(candidate, 0) + 1
+
+            if self.verbose:
+                console.print(f"[dim]  Sample {total_samples}: {len(votes)} candidates, max votes: {max(votes.values())}[/dim]")
 
             # Check if any candidate is ahead by k
             max_votes = max(votes.values())
@@ -87,17 +116,32 @@ class VotingPredictor(dspy.Module):
             if max_votes >= self.k + second_max:
                 # Winner found
                 winner = max(votes.keys(), key=lambda c: votes[c])
+                if self.verbose:
+                    console.print(f"[green]  ✓ Winner after {total_samples} samples ({red_flags} red flags)[/green]")
                 return dspy.Prediction(
                     next_action=winner[0],
                     next_state=winner[1]
                 )
 
+        # If we hit max_votes without a clear winner, return the best candidate
+        if not votes:
+            console.print(f"[red]  ERROR: All {self.max_votes} samples were red-flagged! No valid responses.[/red]")
+            raise ValueError(f"Could not generate valid response after {self.max_votes} attempts")
+
+        console.print(f"[yellow]  Max votes reached ({self.max_votes}), returning best candidate[/yellow]")
+        winner = max(votes.keys(), key=lambda c: votes[c])
+        return dspy.Prediction(
+            next_action=winner[0],
+            next_state=winner[1]
+        )
+
 # 4. MAIN COORDINATOR - chains steps together
 class MAKERSystem(dspy.Module):
-    def __init__(self, k=3, max_steps=None):
+    def __init__(self, k=3, max_steps=None, verbose=False, max_votes=20):
         super().__init__()
-        self.voting_predictor = VotingPredictor(k=k)
+        self.voting_predictor = VotingPredictor(k=k, max_votes=max_votes, verbose=verbose)
         self.max_steps = max_steps
+        self.verbose = verbose
 
     def forward(self, initial_state, strategy, goal_check_fn):
         """
@@ -115,13 +159,18 @@ class MAKERSystem(dspy.Module):
 
         while not goal_check_fn(current_state):
             if self.max_steps and step_count >= self.max_steps:
+                console.print(f"[yellow]Stopped: reached max steps ({self.max_steps})[/yellow]")
                 break
+
+            if self.verbose:
+                console.print(f"\n[bold cyan]Step {step_count + 1}[/bold cyan]")
+                console.print(f"[dim]State: {current_state}[/dim]")
 
             # Get next step via voting
             result = self.voting_predictor(
                 strategy=strategy,
                 current_state=current_state,
-                previous_action=previous_action
+                previous_action=previous_action or "None"
             )
 
             # Update state
@@ -129,6 +178,9 @@ class MAKERSystem(dspy.Module):
             current_state = result.next_state
             previous_action = result.next_action
             step_count += 1
+
+            if self.verbose:
+                console.print(f"[green]Action: {result.next_action}[/green]")
 
         return dspy.Prediction(
             actions=actions,
@@ -189,6 +241,17 @@ if __name__ == "__main__":
         default=100,
         help="Maximum steps before stopping (default: 100)"
     )
+    parser.add_argument(
+        "--max-votes",
+        type=int,
+        default=20,
+        help="Maximum voting samples per step (default: 20)"
+    )
+    parser.add_argument(
+        "--verbose",
+        action="store_true",
+        help="Enable verbose logging"
+    )
     args = parser.parse_args()
 
     # Configure DSPy with OpenRouter
@@ -201,6 +264,8 @@ if __name__ == "__main__":
     console.print(f"[cyan]Model:[/cyan] {args.model}")
     console.print(f"[cyan]Disks:[/cyan] {args.disks} (expected steps: {2**args.disks - 1})")
     console.print(f"[cyan]Voting k:[/cyan] {args.k}")
+    console.print(f"[cyan]Max votes per step:[/cyan] {args.max_votes}")
+    console.print(f"[cyan]Verbose:[/cyan] {args.verbose}")
     console.print()
 
     lm = dspy.LM(
@@ -212,7 +277,7 @@ if __name__ == "__main__":
     dspy.configure(lm=lm)
 
     # Initialize system
-    maker = MAKERSystem(k=args.k, max_steps=args.max_steps)
+    maker = MAKERSystem(k=args.k, max_steps=args.max_steps, verbose=args.verbose, max_votes=args.max_votes)
 
     # Define strategy
     strategy = f"""
@@ -228,11 +293,16 @@ Strategy for EVEN number of disks:
 1. If previous move was NOT disk 1: move disk 1 clockwise (0→1→2→0)
 2. If previous move WAS disk 1: make the only legal move that doesn't involve disk 1
 
-State format: [[peg0 disks], [peg1 disks], [peg2 disks]]
-Each peg lists disks from BOTTOM to TOP.
-Example: [[3,2,1], [], []] means disk 3 at bottom, disk 1 on top of peg 0.
+CRITICAL OUTPUT FORMAT REQUIREMENTS:
+- State format: [[peg0 disks], [peg1 disks], [peg2 disks]]
+  * EXACTLY 3 sublists, one for each peg
+  * Each peg lists disks from BOTTOM to TOP
+  * Example: [[3,2,1], [], []] means disk 3 at bottom, disk 1 on top of peg 0
+  * VALID: [[5,4,3,2], [1], []]
+  * INVALID: [[5,4,3,2], [1], []]] (extra bracket)
 
-Move format: [disk_number, from_peg, to_peg]
+- Move format: [disk_number, from_peg, to_peg]
+  * Example: [1, 0, 1] means move disk 1 from peg 0 to peg 1
 """
 
     # Setup states

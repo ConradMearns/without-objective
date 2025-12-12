@@ -103,3 +103,11 @@ tinyllama
 openelm
 smollm
 mobilellama
+
+working:
+openrouter/mistralai/ministral-3b
+openrouter/meta-llama/llama-3.2-3B-instruct
+openrouter/microsoft/phi-3.5-mini-128k-instruct
+
+kinda sucks(but def fast):
+openrouter/inception/mercury-coder
