@@ -20,6 +20,7 @@ const sketchFunction = (p, offsetY = 0) => {
   let BTM = [-2, 0, 2];
   let DELTA = 0;
 
+  let TICKS = 0
   let TIME = 0
   let FUEL = 0
 
@@ -32,7 +33,7 @@ const sketchFunction = (p, offsetY = 0) => {
   let minusButton, plusButton, deltaDisplay;
 
   // Time and Fuel displays
-  let timeDisplay, fuelDisplay;
+  let timeDisplay, fuelDisplay, tickDisplay;
 
   p.setup = function() {
     p.createCanvas(600, 400);
@@ -115,15 +116,28 @@ const sketchFunction = (p, offsetY = 0) => {
     timeDisplay.style('font-size', '14px');
     timeDisplay.style('width', '50px');
 
+    
     let fuelLabel = p.createDiv('FUEL:');
     fuelLabel.position(infoX + 110, deltaY);
     fuelLabel.style('font-size', '14px');
     fuelLabel.style('font-weight', 'bold');
-
+    
     fuelDisplay = p.createDiv(FUEL.toString());
     fuelDisplay.position(infoX + 160, deltaY);
     fuelDisplay.style('font-size', '14px');
     fuelDisplay.style('width', '50px');
+
+    let tickLabel = p.createDiv('TICKS:');
+    tickLabel.position(infoX+200, deltaY);
+    tickLabel.style('font-size', '14px');
+    tickLabel.style('font-weight', 'bold');
+
+    tickDisplay = p.createDiv(TIME.toString());
+    tickDisplay.position(infoX + 250, deltaY);
+    tickDisplay.style('font-size', '14px');
+    tickDisplay.style('width', '50px');
+
+
   }
 
   p.draw = function() {
@@ -142,6 +156,7 @@ const sketchFunction = (p, offsetY = 0) => {
     // Update displays
     deltaDisplay.html(DELTA.toString());
     timeDisplay.html(TIME.toString());
+    tickDisplay.html(TICKS.toString());
     fuelDisplay.html(FUEL.toString());
   }
 
@@ -230,7 +245,11 @@ const sketchFunction = (p, offsetY = 0) => {
   return {
     tick: function() {
 
-      if (TOP[POS] == TOP[MAX] && BTM[POS] == 0) {
+      TICKS += 1
+      // if (TOP[POS] == TOP[MAX] && BTM[POS] == 0) {
+      //   TIME += 1
+      // }
+      if (TOP[POS] == 0) {
         TIME += 1
       }
       
