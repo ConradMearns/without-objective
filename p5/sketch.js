@@ -2,6 +2,14 @@ const MIN = 0;
 const POS = 1;
 const MAX = 2;
 
+// Global controls
+let sketches = [];
+let tickButton;
+let autoplayButton;
+let speedSlider;
+let autoplayEnabled = false;
+let autoplayInterval = null;
+
 const sketchFunction = (p, offsetY = 0) => {
   // sketch code
   let increments = 30;
@@ -11,12 +19,6 @@ const sketchFunction = (p, offsetY = 0) => {
   let MID = [-5, 1, 5];
   let BTM = [-2, 0, 2];
 
-  let tickButton;
-  let autoplayButton;
-  let speedSlider;
-  let autoplayEnabled = false;
-  let autoplayInterval = null;
-
   // State input fields
   let topMinInput, topPosInput, topMaxInput;
   let midMinInput, midPosInput, midMaxInput;
@@ -24,22 +26,6 @@ const sketchFunction = (p, offsetY = 0) => {
 
   p.setup = function() {
     p.createCanvas(600, 400);
-
-    // Create tick button at the bottom
-    tickButton = p.createButton('tick');
-    tickButton.position(p.width / 2 - 60, offsetY + p.height + 10);
-    tickButton.mousePressed(tick);
-
-    // Create autoplay button
-    autoplayButton = p.createButton('autoplay');
-    autoplayButton.position(p.width / 2 + 10, offsetY + p.height + 10);
-    autoplayButton.mousePressed(toggleAutoplay);
-
-    // Create speed slider (100ms to 2000ms)
-    speedSlider = p.createSlider(100, 2000, 500, 50);
-    speedSlider.position(p.width / 2 - 100, offsetY + p.height + 50);
-    speedSlider.style('width', '200px');
-    speedSlider.input(updateSpeed);
 
     // Create state input fields
     let startX = p.width + 20;
@@ -88,12 +74,6 @@ const sketchFunction = (p, offsetY = 0) => {
     drawLineWithSquare(TOP, 100, p.color(255, 0, 0));    // Red
     drawLineWithSquare(MID, 200, p.color(0, 255, 0));    // Green
     drawLineWithSquare(BTM, 300, p.color(0, 0, 255));    // Blue
-
-    // Display speed slider value
-    p.fill(0);
-    p.noStroke();
-    p.textAlign(p.CENTER);
-    p.text(speedSlider.value() + 'ms', p.width / 2, offsetY + p.height + 85);
   }
 
   function drawLineWithSquare(state, y, squareColor) {
@@ -130,68 +110,115 @@ const sketchFunction = (p, offsetY = 0) => {
     p.square(square_pos, y, squareSize);
   }
 
-  function tick() {
-    p.background('rgba(255,255,255, 0.4)');
-
-    // Handle TOP
-    if (MID[POS] > 0) {
-      TOP[POS] = TOP[POS] + 1
-    } else if (MID[POS] < 0) {
-      TOP[POS] = TOP[POS] - 1
-    }
-    // if (TOP[POS] > TOP[MAX]) TOP[POS] = TOP[MAX]
-    // if (TOP[POS] < TOP[MIN]) TOP[POS] = TOP[MIN]
-
-    // Handle Mid
-    if (BTM[POS] > 0) {
-      MID[POS] = MID[POS] + 1
-    } else if (BTM[POS] < 0) {
-      MID[POS] = MID[POS] - 1
-    }
-    if (MID[POS] > MID[MAX]) MID[POS] = MID[MAX]
-    if (MID[POS] < MID[MIN]) MID[POS] = MID[MIN]
-
-    // Handle BTM
-    if (TOP[POS] > 0) {
-      BTM[POS] = BTM[POS] - 1
-    } else if (TOP[POS] < 0) {
-      BTM[POS] = BTM[POS] + 1
-    }
-    if (BTM[POS] > BTM[MAX]) BTM[POS] = BTM[MAX]
-    if (BTM[POS] < BTM[MIN]) BTM[POS] = BTM[MIN]
-  }
-
-  function toggleAutoplay() {
-    autoplayEnabled = !autoplayEnabled;
-
-    if (autoplayEnabled) {
-      autoplayButton.html('stop');
-      autoplayInterval = setInterval(tick, speedSlider.value());
-    } else {
-      autoplayButton.html('autoplay');
-      if (autoplayInterval) {
-        clearInterval(autoplayInterval);
-        autoplayInterval = null;
-      }
-    }
-  }
-
-  function updateSpeed() {
-    // If autoplay is running, restart it with the new speed
-    if (autoplayEnabled && autoplayInterval) {
-      clearInterval(autoplayInterval);
-      autoplayInterval = setInterval(tick, speedSlider.value());
-    }
-  }
-
   function updateState(stateArray, index, inputField) {
     let value = parseInt(inputField.value());
     if (!isNaN(value)) {
       stateArray[index] = value;
     }
   }
+
+  // Public API for this sketch
+  return {
+    tick: function() {
+      p.background('rgba(255,255,255, 0.4)');
+
+      // Handle TOP
+      if (MID[POS] > 0) {
+        TOP[POS] = TOP[POS] + 1
+      } else if (MID[POS] < 0) {
+        TOP[POS] = TOP[POS] - 1
+      }
+      if (TOP[POS] > TOP[MAX]) TOP[POS] = TOP[MAX]
+      if (TOP[POS] < TOP[MIN]) TOP[POS] = TOP[MIN]
+
+      // Handle Mid
+      if (BTM[POS] > 0) {
+        MID[POS] = MID[POS] + 1
+      } else if (BTM[POS] < 0) {
+        MID[POS] = MID[POS] - 1
+      }
+      if (MID[POS] > MID[MAX]) MID[POS] = MID[MAX]
+      if (MID[POS] < MID[MIN]) MID[POS] = MID[MIN]
+
+      // Handle BTM
+      if (TOP[POS] > 0) {
+        BTM[POS] = BTM[POS] - 1
+      } else if (TOP[POS] < 0) {
+        BTM[POS] = BTM[POS] + 1
+      }
+      if (BTM[POS] > BTM[MAX]) BTM[POS] = BTM[MAX]
+      if (BTM[POS] < BTM[MIN]) BTM[POS] = BTM[MIN]
+    }
+  };
 };
 
 // Create two instances of the sketch
-new p5(p => sketchFunction(p, 0), 'sketch1');
-new p5(p => sketchFunction(p, 600), 'sketch2');
+let sketch1Instance;
+let sketch2Instance;
+
+sketch1Instance = new p5(p => {
+  const api = sketchFunction(p, 0);
+  sketches.push(api);
+}, 'sketch1');
+
+sketch2Instance = new p5(p => {
+  const api = sketchFunction(p, 600);
+  sketches.push(api);
+}, 'sketch2');
+
+// Create global controls using the first sketch instance
+new p5(p => {
+  p.setup = function() {
+    // Position below the second sketch (600 offset + 400 height + spacing)
+    let controlY = 1010;
+
+    // Create tick button
+    tickButton = p.createButton('tick');
+    tickButton.position(240, controlY);
+    tickButton.mousePressed(tickAll);
+
+    // Create autoplay button
+    autoplayButton = p.createButton('autoplay');
+    autoplayButton.position(310, controlY);
+    autoplayButton.mousePressed(toggleAutoplay);
+
+    // Create speed slider (100ms to 2000ms)
+    speedSlider = p.createSlider(100, 2000, 500, 50);
+    speedSlider.position(200, controlY + 40);
+    speedSlider.style('width', '200px');
+    speedSlider.input(updateSpeed);
+
+    // Display speed label
+    let speedLabel = p.createP('Speed:');
+    speedLabel.position(200, controlY + 65);
+    speedLabel.style('margin', '0');
+    speedLabel.style('font-size', '12px');
+  };
+});
+
+function tickAll() {
+  sketches.forEach(sketch => sketch.tick());
+}
+
+function toggleAutoplay() {
+  autoplayEnabled = !autoplayEnabled;
+
+  if (autoplayEnabled) {
+    autoplayButton.html('stop');
+    autoplayInterval = setInterval(tickAll, speedSlider.value());
+  } else {
+    autoplayButton.html('autoplay');
+    if (autoplayInterval) {
+      clearInterval(autoplayInterval);
+      autoplayInterval = null;
+    }
+  }
+}
+
+function updateSpeed() {
+  // If autoplay is running, restart it with the new speed
+  if (autoplayEnabled && autoplayInterval) {
+    clearInterval(autoplayInterval);
+    autoplayInterval = setInterval(tickAll, speedSlider.value());
+  }
+}
