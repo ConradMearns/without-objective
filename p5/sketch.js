@@ -15,9 +15,9 @@ const sketchFunction = (p, offsetY = 0) => {
   let increments = 30;
 
   // state
-  let TOP = [-1, 0, 1];
+  let TOP = [-2, 0, 2];
   let MID = [-2, 1, 2];
-  let BTM = [-1, 0, 1];
+  let BTM = [-2, 0, 2];
   let DELTA = 0;
 
   let TIME = 0
@@ -30,6 +30,9 @@ const sketchFunction = (p, offsetY = 0) => {
 
   // Delta controls
   let minusButton, plusButton, deltaDisplay;
+
+  // Time and Fuel displays
+  let timeDisplay, fuelDisplay;
 
   p.setup = function() {
     p.createCanvas(600, 400);
@@ -98,6 +101,29 @@ const sketchFunction = (p, offsetY = 0) => {
     plusButton.mousePressed(() => {
       DELTA++;
     });
+
+    // TIME and FUEL displays
+    let infoX = deltaX + 200;
+
+    let timeLabel = p.createDiv('TIME:');
+    timeLabel.position(infoX, deltaY);
+    timeLabel.style('font-size', '14px');
+    timeLabel.style('font-weight', 'bold');
+
+    timeDisplay = p.createDiv(TIME.toString());
+    timeDisplay.position(infoX + 50, deltaY);
+    timeDisplay.style('font-size', '14px');
+    timeDisplay.style('width', '50px');
+
+    let fuelLabel = p.createDiv('FUEL:');
+    fuelLabel.position(infoX + 110, deltaY);
+    fuelLabel.style('font-size', '14px');
+    fuelLabel.style('font-weight', 'bold');
+
+    fuelDisplay = p.createDiv(FUEL.toString());
+    fuelDisplay.position(infoX + 160, deltaY);
+    fuelDisplay.style('font-size', '14px');
+    fuelDisplay.style('width', '50px');
   }
 
   p.draw = function() {
@@ -113,8 +139,10 @@ const sketchFunction = (p, offsetY = 0) => {
     // Draw border based on state comparison
     drawBorder();
 
-    // Update delta display
+    // Update displays
     deltaDisplay.html(DELTA.toString());
+    timeDisplay.html(TIME.toString());
+    fuelDisplay.html(FUEL.toString());
   }
 
   function drawBorder() {
@@ -201,8 +229,11 @@ const sketchFunction = (p, offsetY = 0) => {
   // Public API for this sketch
   return {
     tick: function() {
-      TIME += 1
 
+      if (TOP[POS] == TOP[MAX] && BTM == 0) {
+        TIME += 1
+      }
+      
       p.background('rgba(255,255,255, 0.4)');
 
       // Handle TOP
@@ -236,13 +267,13 @@ const sketchFunction = (p, offsetY = 0) => {
       let BTM_ZERO = BTM[POS] == 0
       if (BTM_ZERO && MID[POS] == MID[MAX]) {
         MID[MIN] -= DELTA
+        FUEL -= p.abs(DELTA)
         DELTA = 0
-        FUEL -= 1
       }
       if (BTM_ZERO && MID[POS] == MID[MIN]) {
         MID[MAX] += DELTA
+        FUEL -= p.abs(DELTA)
         DELTA = 0
-        FUEL -= 1
       }
 
 
@@ -269,7 +300,7 @@ sketch1Instance = new p5(p => {
 }, 'sketch1');
 
 sketch2Instance = new p5(p => {
-  const api = sketchFunction(p, 600);
+  const api = sketchFunction(p, 500);
   sketches.push(api);
 }, 'sketch2');
 
