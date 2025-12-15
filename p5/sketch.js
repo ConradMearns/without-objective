@@ -15,9 +15,9 @@ const sketchFunction = (p, offsetY = 0) => {
   let increments = 30;
 
   // state
-  let TOP = [-8, 0, 8];
-  let MID = [-5, 1, 5];
-  let BTM = [-2, 0, 2];
+  let TOP = [-1, 0, 1];
+  let MID = [-2, 1, 2];
+  let BTM = [-1, 0, 1];
 
   // State input fields
   let topMinInput, topPosInput, topMaxInput;
