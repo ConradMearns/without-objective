@@ -230,7 +230,7 @@ const sketchFunction = (p, offsetY = 0) => {
   return {
     tick: function() {
 
-      if (TOP[POS] == TOP[MAX] && BTM == 0) {
+      if (TOP[POS] == TOP[MAX] && BTM[POS] == 0) {
         TIME += 1
       }
       
