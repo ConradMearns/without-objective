@@ -18,11 +18,18 @@ const sketchFunction = (p, offsetY = 0) => {
   let TOP = [-1, 0, 1];
   let MID = [-2, 1, 2];
   let BTM = [-1, 0, 1];
+  let DELTA = 0;
+
+  let TIME = 0
+  let FUEL = 0
 
   // State input fields
   let topMinInput, topPosInput, topMaxInput;
   let midMinInput, midPosInput, midMaxInput;
   let btmMinInput, btmPosInput, btmMaxInput;
+
+  // Delta controls
+  let minusButton, plusButton, deltaDisplay;
 
   p.setup = function() {
     p.createCanvas(600, 400);
@@ -63,6 +70,34 @@ const sketchFunction = (p, offsetY = 0) => {
     p.createP('MIN').position(startX, startY - 40).size(40).style('margin', '0').style('font-size', '10px');
     p.createP('POS').position(startX + 50, startY - 40).size(40).style('margin', '0').style('font-size', '10px');
     p.createP('MAX').position(startX + 100, startY - 40).size(40).style('margin', '0').style('font-size', '10px');
+
+    // DELTA controls below the canvas
+    let deltaY = offsetY + p.height + 10;
+    let deltaX = 50;
+
+    minusButton = p.createButton('-');
+    minusButton.position(deltaX, deltaY);
+    minusButton.size(30, 30);
+    minusButton.mousePressed(() => {
+      DELTA--;
+    });
+
+    deltaDisplay = p.createDiv(DELTA.toString());
+    deltaDisplay.position(deltaX + 40, deltaY);
+    deltaDisplay.style('width', '60px');
+    deltaDisplay.style('height', '30px');
+    deltaDisplay.style('text-align', 'center');
+    deltaDisplay.style('line-height', '30px');
+    deltaDisplay.style('font-size', '18px');
+    deltaDisplay.style('font-weight', 'bold');
+    deltaDisplay.style('border', '1px solid #000');
+
+    plusButton = p.createButton('+');
+    plusButton.position(deltaX + 110, deltaY);
+    plusButton.size(30, 30);
+    plusButton.mousePressed(() => {
+      DELTA++;
+    });
   }
 
   p.draw = function() {
@@ -77,6 +112,9 @@ const sketchFunction = (p, offsetY = 0) => {
 
     // Draw border based on state comparison
     drawBorder();
+
+    // Update delta display
+    deltaDisplay.html(DELTA.toString());
   }
 
   function drawBorder() {
@@ -163,6 +201,8 @@ const sketchFunction = (p, offsetY = 0) => {
   // Public API for this sketch
   return {
     tick: function() {
+      TIME += 1
+
       p.background('rgba(255,255,255, 0.4)');
 
       // Handle TOP
@@ -191,12 +231,29 @@ const sketchFunction = (p, offsetY = 0) => {
       }
       if (BTM[POS] > BTM[MAX]) BTM[POS] = BTM[MAX]
       if (BTM[POS] < BTM[MIN]) BTM[POS] = BTM[MIN]
+      
+      // HANDLE DELTA
+      let BTM_ZERO = BTM[POS] == 0
+      if (BTM_ZERO && MID[POS] == MID[MAX]) {
+        MID[MIN] -= DELTA
+        DELTA = 0
+        FUEL -= 1
+      }
+      if (BTM_ZERO && MID[POS] == MID[MIN]) {
+        MID[MAX] += DELTA
+        DELTA = 0
+        FUEL -= 1
+      }
+
+
+
     },
     getState: function() {
       return {
         TOP: [...TOP],
         MID: [...MID],
-        BTM: [...BTM]
+        BTM: [...BTM],
+        DELTA: DELTA
       };
     }
   };
