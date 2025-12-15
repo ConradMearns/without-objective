@@ -74,6 +74,49 @@ const sketchFunction = (p, offsetY = 0) => {
     drawLineWithSquare(TOP, 100, p.color(255, 0, 0));    // Red
     drawLineWithSquare(MID, 200, p.color(0, 255, 0));    // Green
     drawLineWithSquare(BTM, 300, p.color(0, 0, 255));    // Blue
+
+    // Draw border based on state comparison
+    drawBorder();
+  }
+
+  function drawBorder() {
+    let allMatch = checkAllStatesMatch();
+
+    p.noFill();
+    let borderWeight = 8;
+    p.strokeWeight(borderWeight);
+    if (allMatch) {
+      p.stroke(0, 255, 0); // Green
+    } else {
+      p.stroke(255, 255, 0); // Yellow
+    }
+    // Offset by half stroke weight to center border on canvas edge
+    let offset = borderWeight / 2;
+    p.rectMode(p.CORNER);
+    p.rect(offset, offset, p.width - borderWeight, p.height - borderWeight);
+  }
+
+  function checkAllStatesMatch() {
+    if (sketches.length < 2) return true;
+
+    // Get first sketch's state as reference
+    let refState = sketches[0].getState();
+
+    // Compare all other sketches to the first one
+    for (let i = 1; i < sketches.length; i++) {
+      let currentState = sketches[i].getState();
+
+      // Compare each array element
+      for (let j = 0; j < 3; j++) {
+        if (refState.TOP[j] !== currentState.TOP[j] ||
+            refState.MID[j] !== currentState.MID[j] ||
+            refState.BTM[j] !== currentState.BTM[j]) {
+          return false;
+        }
+      }
+    }
+
+    return true;
   }
 
   function drawLineWithSquare(state, y, squareColor) {
@@ -148,6 +191,13 @@ const sketchFunction = (p, offsetY = 0) => {
       }
       if (BTM[POS] > BTM[MAX]) BTM[POS] = BTM[MAX]
       if (BTM[POS] < BTM[MIN]) BTM[POS] = BTM[MIN]
+    },
+    getState: function() {
+      return {
+        TOP: [...TOP],
+        MID: [...MID],
+        BTM: [...BTM]
+      };
     }
   };
 };
