@@ -1,0 +1,5 @@
+# PNF Editor commands
+
+# Run the interactive file editor
+edit:
+    ./file_editor.py
