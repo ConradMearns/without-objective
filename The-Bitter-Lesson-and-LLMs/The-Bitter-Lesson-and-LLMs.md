@@ -47,3 +47,7 @@ My take is that 2026 will made by the knowledge gardeners and technological libr
 ---
 
 The Bitter Lesson: http://www.incompleteideas.net/IncIdeas/BitterLesson.html
+
+---
+
+Comment here: https://bsky.app/profile/did:plc:ktgsgyyog2ukxp4may7aiar3/post/3mbkjzttt622t
